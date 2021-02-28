@@ -9,7 +9,7 @@ module.exports.validateRegisterInput = (
   }
   if (password === '') {
     errors.password = 'Password must not empty';
-  } 
+  }
   if (password !== confirmPassword) {
     errors.confirmPassword = 'Passwords must match';
   }

@@ -5,7 +5,7 @@ const recordSchema = new Schema({
     amount: Number,
     use: String,
     comments: String,
-    createdAt: String,
+    date: String,
     user: {
         type: Schema.Types.ObjectId,
         ref: 'User'

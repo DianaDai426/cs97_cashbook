@@ -7,7 +7,7 @@ module.exports = gql`
     amount: Float!
     use: String!
     comments: String!
-    createdAt: String!
+    date: String!
   }
   type User {
     id: ID!
@@ -22,13 +22,15 @@ module.exports = gql`
   }
   type Query {
     getRecords: [Record]
-    getRecord(recordId: ID!): Record
+    getRecordsByUse: [Record]
+    getRecordsByAmountIO: [Record]
+    getRecordsByAmountDO: [Record]
   }
   type Mutation {
     register(registerInput: RegisterInput): User!
     login(username: String!, password: String!): User!
-    createRecord(amount: Float!, use: String!, comments: String!): Record!
-    editRecord(recordId: ID!, amount: Float!, use: String!, comments: String!): String!
+    createRecord(amount: Float!, use: String!, date: String!, comments: String!): Record!
+    editRecord(recordId: ID!, amount: Float!, use: String!, date: String!, comments: String!): String!
     deleteRecord(recordId: ID!): String!
   }
 `;
