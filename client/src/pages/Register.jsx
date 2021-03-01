@@ -24,19 +24,20 @@ function Register() {
 
     const onSubmit = (event) => {
         event.preventDefault();
-        addUser()
+        addUser();
     }
 
     
 
     return (
-        <div>
+        <div className="form-container">
             <Form onSubmit={onSubmit} noValidate>
                 <h1>Register</h1>
                 <Form.Input
                     label="Username"
                     placeholder="Username.."
                     name="username"
+                    type="text"
                     value={values.username}
                     onChange={onChange}
                     />
@@ -44,6 +45,7 @@ function Register() {
                     label="Email"
                     placeholder="Email.."
                     name="email"
+                    type="email"
                     value={values.email}
                     onChange={onChange}
                     />
@@ -51,14 +53,16 @@ function Register() {
                     label="Password"
                     placeholder="Password.."
                     name="password"
+                    type="password"
                     value={values.password}
                     onChange={onChange}
                     />
                 <Form.Input
                     label="Confirm Password"
                     placeholder="Confirm Password.."
-                    name="password"
-                    value={values.password}
+                    name="confirmPassword"
+                    type="password"
+                    value={values.confirmPassword}
                     onChange={onChange}
                     />
                 <Button type="submit" primary>
