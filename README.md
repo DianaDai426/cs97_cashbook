@@ -4,8 +4,10 @@ This works on http://localhost:5000
 
 Then go into ./client and type the following commands:
 
+npm install -g yarn; 
 yarn add @material-ui/core ;
 yarn add @material-ui/icons ;
+yarn add semantic-ui-react ;
 npm install react-router-dom --save ;
 npm install ;
 npm start ;
