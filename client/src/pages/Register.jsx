@@ -44,7 +44,10 @@ function Register(props) {
                     name="username"
                     type="text"
                     value={values.username}
+<<<<<<< HEAD
                     error={errors.username ? true : false}
+=======
+>>>>>>> 2cbdfd8d52a7dd4f6dabed72ee890d8387636ad0
                     onChange={onChange}
                     />
                 <Form.Input
