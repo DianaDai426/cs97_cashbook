@@ -7,7 +7,7 @@ Then go into ./client and type the following commands:
 npm install -g yarn; 
 yarn add @material-ui/core ;
 yarn add @material-ui/icons ;
-yarn add semantic-ui-react ;
+npm install semantic-ui-react semantic-ui-css;
 npm install react-router-dom --save ;
 npm install ;
 npm start ;
