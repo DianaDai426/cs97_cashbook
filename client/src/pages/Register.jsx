@@ -6,7 +6,6 @@ import gql from 'graphql-tag'
 function Register() {
     const[values, setValues] = useState({
         username: '',
-        email: '',
         password: '',
         confirmPassword: '',
     })
@@ -42,14 +41,6 @@ function Register() {
                     onChange={onChange}
                     />
                 <Form.Input
-                    label="Email"
-                    placeholder="Email.."
-                    name="email"
-                    type="email"
-                    value={values.email}
-                    onChange={onChange}
-                    />
-                <Form.Input
                     label="Password"
                     placeholder="Password.."
                     name="password"
@@ -76,19 +67,17 @@ function Register() {
 const REGISTER_USER = gql`
     mutation register(
         $username: String!
-        $email: String!
         $password: String!
         $confirmPassword: String!
     ) {
         register(
             registerInput: {
                 username: $username
-                email: $email
                 password: $password
                 confirmPassword: $confirmPassword
             }
         ){
-            id email username createdAt token
+            id username createdAt token
         }
     }
 `
