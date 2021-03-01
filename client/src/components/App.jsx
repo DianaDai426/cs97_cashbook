@@ -5,7 +5,7 @@ import Login from './Login';
 
 export default function App() {
     return (
-    <Router> 
+    <Router>
         <Switch>
           <Route exact path="/" component={Home}></Route>
           <Route exact path='/login' component = {Login}></Route>
