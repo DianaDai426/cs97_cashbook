@@ -1,11 +1,16 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Header from "../components/Header";
 import Note from "../components/Entry";
 import CreateArea from "../components/CreateArea";
 
+import gql from 'graphql-tag';
+import {AuthContext} from '../context/auth';
+
 
 function Home() {
+  const {user} = useContext(AuthContext);
   const [notes, setNotes] = useState([]);
+
 
   function addNote(newNote) {
     setNotes(prevNotes => {
@@ -40,5 +45,18 @@ function Home() {
     </div>
   );
 }
+
+export const FETCH_RECORDS_QUERY = gql`
+  {
+    getRecords {
+      id
+      username
+      amount
+      use
+      comments
+      date
+    }
+  }
+`;
 
 export default Home;
