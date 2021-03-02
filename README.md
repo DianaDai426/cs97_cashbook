@@ -1,4 +1,6 @@
-Go into the directory with these files and type 'node index' to start
+Go into the directory with these files and type 'npm install'
+
+Then, type 'node index' to start.
 
 This works on http://localhost:5000
 
