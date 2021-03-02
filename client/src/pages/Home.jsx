@@ -2,10 +2,9 @@ import React, { useState } from "react";
 import Header from "../components/Header";
 import Note from "../components/Entry";
 import CreateArea from "../components/CreateArea";
-//below import is for testing
-import gql from 'graphql-tag';
 
-function App() {
+
+function Home() {
   const [notes, setNotes] = useState([]);
 
   function addNote(newNote) {
@@ -42,4 +41,4 @@ function App() {
   );
 }
 
-export default App;
+export default Home;
