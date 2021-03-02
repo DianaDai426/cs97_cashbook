@@ -35,9 +35,10 @@ function Home() {
           <Note
             key={index}
             id={index}
-            company={noteItem.company}
             amount={noteItem.amount}
             date={noteItem.date}
+            use = {noteItem.use}
+            comment = {noteItem.comment}
             onDelete={deleteNote}
           />
         );

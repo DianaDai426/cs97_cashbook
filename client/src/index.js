@@ -1,5 +1,9 @@
-import React from "react";
+//import React from "react";
 import ReactDOM from "react-dom";
-import App from "./components/App";
+//import App from "./App";
+import ApolloProvider from './ApolloProvider'
 
-ReactDOM.render(<App />, document.getElementById("root"));
+
+//ApolloProvider will call App() instead
+ReactDOM.render(ApolloProvider, document.getElementById('root'));
+//ReactDOM.render(<App />, document.getElementById("root"));

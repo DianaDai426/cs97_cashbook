@@ -8,10 +8,10 @@ function Note(props) {
 
   return (
     <div className="note">
-      <h1>{props.title}</h1>
-      <p>{props.company}</p>
-      <p>{props.amount}</p>
+      <h1>{props.amount}</h1>
       <p>{props.date}</p>
+      <p>{props.use}</p>
+      <p>{props.comment}</p>
       <button onClick={handleClick}>
         <DeleteIcon />
       </button>

@@ -1,20 +1,30 @@
-import React, { useState } from "react";
+import React, { Fragment, useState } from "react";
 import AddIcon from "@material-ui/icons/Add";
-import Fab from "@material-ui/core/Fab";
-import Zoom from "@material-ui/core/Zoom";
+import {
+  Fab,
+  Zoom,
+  InputLabel,
+  InputAdornment,
+  Input,
+} from "@material-ui/core";
+import DateFnsUtils from '@date-io/date-fns';
+import { MuiPickersUtilsProvider, KeyboardDatePicker } from "@material-ui/pickers";
+import Alert from '@material-ui/lab/Alert';
 
 function CreateArea(props) {
-  const [isExpanded, setExpanded] = useState(false);
-
+  //const [isExpanded, setExpanded] = useState(false);
+  const [date, setDate] = useState(new Date());
   const [note, setNote] = useState({
-    company: "",
-    amount: "",
-    date: "", 
+    amount: 0,
+    date: new Date(), 
+    use: "", 
+    comment:"",
   });
+
+  const [error, setError] = useState(""); 
 
   function handleChange(event) {
     const { name, value } = event.target;
-
     setNote(prevNote => {
       return {
         ...prevNote,
@@ -24,55 +34,93 @@ function CreateArea(props) {
   }
 
   function submitNote(event) {
+    //check if valid (required fields except the commment)
+    if(!note.amount || !note.date || !note.use){
+      setError ("All fields except comment must be filled");
+      return;
+    }
+
     props.onAdd(note);
     setNote({
-      title: "",
-      content: ""
+      amount: "",
+      date: new Date(), 
+      use: "",
+      comment:"",
     });
+    setError("");
     event.preventDefault();
   }
 
-  function expand() {
-    setExpanded(true);
-  }
+  // function expand() {
+  //   setExpanded(true);
+  // }
 
   return (
     <div>
       <form className="create-note">
-
-          <input
-            name="company"
-            onChange={handleChange}
-            value={note.title}
-            placeholder="Company"
-          />
-        
-        {isExpanded && (
-        <textarea
+        {/* <textarea
           name="amount"
-          onClick={expand}
+          // onClick={expand}
           onChange={handleChange}
-          value={note.content}
-          placeholder="Amount"
-          rows={isExpanded ? 1 : 0}
-        />        )}
-        <textarea
+          value={note.amount}
+          placeholder="Amount" 
+          startAdornment = {<p>$</p>}
+          rows={1}
+        />        */}
+        <InputLabel htmlFor="standard-adornment-amount">Amount</InputLabel>
+          <Input
+            name = "amount"
+            id="standard-adornment-amount"
+            value={note.amount==0 ? "": note.amount}
+            onChange={handleChange}
+            disableUnderline
+            startAdornment={<InputAdornment position="start">$</InputAdornment>}
+          />
+        {/* <textarea
           name="date"
-          onClick={expand}
+          // onClick={expand}
           onChange={handleChange}
-          value={note.content}
+          value={note.date}
           placeholder="Date"
-          rows={isExpanded ? 1 : 0}
+          rows={1}
+        /> */}
+        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+          <KeyboardDatePicker
+          name="date"
+          disableUnderline
+          clearable
+          value={date}
+          placeholder="10/10/2018"
+          onChange={date => setDate(date)}
+          maxDate={new Date()} 
+          format="MM/dd/yyyy"
+        />          
+        </MuiPickersUtilsProvider>
+
+
+        <textarea
+          name="use"
+          // onClick={expand}
+          onChange={handleChange}
+          value={note.use}
+          placeholder="Use"
+          rows={1}
+        />
+        <textarea
+          name="comment"
+          // onClick={expand}
+          onChange={handleChange}
+          value={note.comment}
+          placeholder="Comment"
+          rows={1}
         />
 
 
 
-
-        <Zoom in={isExpanded}>
           <Fab onClick={submitNote}>
             <AddIcon />
           </Fab>
-        </Zoom>
+        {error && <Alert variant="outlined" severity="warning">{error}</Alert>}
       </form>
     </div>
   );
