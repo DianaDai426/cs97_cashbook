@@ -57,6 +57,9 @@ function CreateArea(props) {
   }
 
   const handleOnValueChange = (value: string | undefined): void => {
+    if(value === undefined){
+      value = "0";
+    }
     setNote(prevNote => {
       return {
         ...prevNote,
@@ -75,7 +78,8 @@ function CreateArea(props) {
 
     const newNote = {
       amount: note.amount,
-      date: date.toLocaleDateString(),
+      date : note.date,
+      //date: date.toLocaleDateString(),
       use: note.use,
       comment: note.comment
     }

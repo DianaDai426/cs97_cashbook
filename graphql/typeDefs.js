@@ -22,7 +22,6 @@ module.exports = gql`
   }
   type Query {
     getRecords: [Record]
-    getAllRecords: [Record]
     getRecordsByUse: [Record]
     getRecordsByAmountIO: [Record]
     getRecordsByAmountDO: [Record]

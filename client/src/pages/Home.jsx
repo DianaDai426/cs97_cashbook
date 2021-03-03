@@ -14,14 +14,17 @@ function Home() {
   const userName = user ? user.username : '';
 
   let arr = [];
-  const [notes, setNotes] = useState(arr);
+  const [notes, setNotes] = useState([]);
 
-/*
-  const {loading, data: { getRecords : records} = {}} = useQuery(FETCH_RECORDS_QUERY, {
-    variables: { userName }
-  });
+
+  /*
+  function DefaultRecords() {
+    const {loading, data: { getRecordsByUse : records} = {}} = useQuery(FETCH_RECORDSUSE_QUERY);
+    return records;
+  }
   */
-  const {loading, data: { getRecordsByUse : records} = {}} = useQuery(FETCH_RECORDSUSE_QUERY);
+
+  const {loading, data: { getRecords : records} = {}} = useQuery(FETCH_RECORDS_QUERY);
   console.log(records);
   if(records){
     records.forEach(function(item){
@@ -39,14 +42,6 @@ function Home() {
     }
   }, [records])
 
-/*
-  function DefaultRecord(userName){
-    const {loading, data: { getRecords : records} = {}} = useQuery(FETCH_RECORDS_QUERY, {
-      variables: { userName }
-    });
-    return records;
-  }
-*/
 
   function addNote(newNote) {
     setNotes(prevNotes => {
