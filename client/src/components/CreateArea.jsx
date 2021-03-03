@@ -101,8 +101,6 @@ function CreateArea(props) {
         <TextField
             id="date"
             type="date"
-            validate
-            disableUnderline
             defaultValue= {date}
             InputLabelProps={{
               shrink: true,

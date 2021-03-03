@@ -13,12 +13,17 @@ function Home() {
   const {user} = useContext(AuthContext);
   const userName = user ? user.username : '';
 
-  let arr = [];
-  const [notes, setNotes] = useState(arr);
+
+  const [notes, setNotes] = useState([]);
 
   const {loading, data: { getRecords : records} = {}} = useQuery(FETCH_RECORDS_QUERY, {
     variables: { userName }
   });
+
+  React.useEffect(() => {
+  let arr = [];
+
+
   console.log(records);
   if(records){
     records.forEach(function(item){
@@ -31,16 +36,11 @@ function Home() {
     console.log(arr);
   }
 
-<<<<<<< HEAD
-  //console.log(arr);
-  const [notes, setNotes] = useState(arr);
-=======
-  React.useEffect(() => {
+
       if (records){
         setNotes(arr);
     }
   }, [records])
->>>>>>> 1c79caa2d56a02cd1e454e543ed05e75c8f8a248
 
 /*
   function DefaultRecord(userName){
