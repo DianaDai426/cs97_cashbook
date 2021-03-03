@@ -13,10 +13,10 @@ import Alert from '@material-ui/lab/Alert';
 
 function CreateArea(props) {
   //const [isExpanded, setExpanded] = useState(false);
-  const [date, setDate] = useState(new Date());
+  const [date, setDate] = useState("");
   const [note, setNote] = useState({
     amount: 0,
-    date: new Date(), 
+    date: "", 
     use: "", 
     comment:"",
   });
@@ -43,7 +43,7 @@ function CreateArea(props) {
     props.onAdd(note);
     setNote({
       amount: "",
-      date: new Date(), 
+      date: "", 
       use: "",
       comment:"",
     });
@@ -76,15 +76,15 @@ function CreateArea(props) {
             disableUnderline
             startAdornment={<InputAdornment position="start">$</InputAdornment>}
           />
-        {/* <textarea
+        <textarea
           name="date"
           // onClick={expand}
           onChange={handleChange}
           value={note.date}
           placeholder="Date"
           rows={1}
-        /> */}
-        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+        />
+        {/* <MuiPickersUtilsProvider utils={DateFnsUtils}>
           <KeyboardDatePicker
           name="date"
           disableUnderline
@@ -95,7 +95,7 @@ function CreateArea(props) {
           maxDate={new Date()} 
           format="MM/dd/yyyy"
         />          
-        </MuiPickersUtilsProvider>
+        </MuiPickersUtilsProvider> */}
 
 
         <textarea
