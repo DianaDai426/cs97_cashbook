@@ -1,29 +1,54 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState} from "react";
 import Header from "../components/Header";
 import Note from "../components/Entry";
 import CreateArea from "../components/CreateArea";
-import { useQuery } from '@apollo/react-hooks'
+import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import {AuthContext} from '../context/auth';
 import { Grid } from "@material-ui/core";
 
 
+
 function Home() {
   const {user} = useContext(AuthContext);
-  const [notes, setNotes] = useState([]);
+  const userName = user ? user.username : '';
 
-  const {loading, data} = useQuery(FETCH_RECORDS_QUERY);
+  let arr = [];
 
-  if(data)
-  {
-    console.log(data)
+  const {loading, data: { getRecords : records} = {}} = useQuery(FETCH_RECORDS_QUERY, {
+    variables: { userName }
+  });
+  if(records){
+    console.log(records);
+    records.forEach(function(item){
+      arr.push({amount : item.amount,
+                date : item.date,
+                use : item.use,
+                comment: item.comments,
+              });
+    });
   }
+
+  console.log(arr);
+  const [notes, setNotes] = useState(arr);
+
+/*
+  function DefaultRecord(userName){
+    const {loading, data: { getRecords : records} = {}} = useQuery(FETCH_RECORDS_QUERY, {
+      variables: { userName }
+    });
+    return records;
+  }
+*/
 
   function addNote(newNote) {
     setNotes(prevNotes => {
       return [...prevNotes, newNote];
     });
   }
+
+
+
 
   function deleteNote(id) {
     setNotes(prevNotes => {
@@ -60,8 +85,8 @@ function Home() {
 }
 
 export const FETCH_RECORDS_QUERY = gql`
-  {
-    getRecords {
+  query($userName: String!) {
+    getRecords(userName: $userName){
       id
       username
       amount
@@ -71,5 +96,6 @@ export const FETCH_RECORDS_QUERY = gql`
     }
   }
 `;
+
 
 export default Home;

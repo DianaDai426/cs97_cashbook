@@ -7,16 +7,15 @@ module.exports = {
     Query: {
         //Sort by date (the latest comes first)
         //Default mode
-        async getRecords(_, { }, context) {
-            const user = authCheck(context);
+        async getRecords(_, {userName}) {
             try {
-                const records = await Record.find({ username: user.username }).sort({ date: -1 });
+                const records = await Record.find({ username: userName}).sort({ date: -1 });
+
                 return records;
             } catch (err) {
                 throw new Error(err);
             }
         },
-
         //Sort by use (alphabetical order)
         async getRecordsByUse(_, { }, context) {
             const user = authCheck(context);
