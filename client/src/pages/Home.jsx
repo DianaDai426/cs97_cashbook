@@ -27,9 +27,10 @@ function Home() {
                 comment: item.comments,
               });
     });
+    console.log(arr);
   }
 
-  console.log(arr);
+  //console.log(arr);
   const [notes, setNotes] = useState(arr);
 
 /*
