@@ -13,14 +13,14 @@ import { MuiPickersUtilsProvider, KeyboardDatePicker } from "@material-ui/picker
 import Alert from '@material-ui/lab/Alert';
 import gql from 'graphql-tag'
 import { useMutation } from '@apollo/react-hooks';
-import CurrencyInput from 'react-currency-input';
+import CurrencyInput from 'react-currency-input-field';
 import DatePicker from "react-datepicker";
 function CreateArea(props) {
   //const [isExpanded, setExpanded] = useState(false);
   const [date, setDate] = useState(new Date());
   const [note, setNote] = useState({
     amount: 0,
-    use: "", 
+    use: "",
     comment:"",
   });
 
@@ -55,6 +55,15 @@ function CreateArea(props) {
       };
     });
   }
+
+  const handleOnValueChange = (value: string | undefined): void => {
+    setNote(prevNote => {
+      return {
+        ...prevNote,
+        ["amount"]: value
+      };
+    });
+ };
 
   function submitNote(event) {
     console.log("submitting....");
@@ -94,15 +103,13 @@ function CreateArea(props) {
         <CurrencyInput
         name = "amount"
         value={note.amount}
-        onChangeEvent={handleChange}
+        onValueChange={handleOnValueChange}
         prefix="$"
-        thousandSeparator=""
+        groupSeparator=""
         />
         <TextField
             id="date"
             type="date"
-            validate
-            disableUnderline
             defaultValue= {date}
             InputLabelProps={{
               shrink: true,
