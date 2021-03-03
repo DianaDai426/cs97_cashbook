@@ -6,19 +6,20 @@ import {
   InputLabel,
   InputAdornment,
   Input,
+  TextField,
 } from "@material-ui/core";
 import DateFnsUtils from '@date-io/date-fns';
 import { MuiPickersUtilsProvider, KeyboardDatePicker } from "@material-ui/pickers";
 import Alert from '@material-ui/lab/Alert';
 import gql from 'graphql-tag'
-import { useMutation } from '@apollo/react-hooks'
-
+import { useMutation } from '@apollo/react-hooks';
+import CurrencyInput from 'react-currency-input';
+import DatePicker from "react-datepicker";
 function CreateArea(props) {
   //const [isExpanded, setExpanded] = useState(false);
-  const [date, setDate] = useState("");
+  const [date, setDate] = useState(new Date());
   const [note, setNote] = useState({
     amount: 0,
-    date: "", 
     use: "", 
     comment:"",
   });
@@ -27,16 +28,21 @@ function CreateArea(props) {
   
   const [sendNote, { SendNote_error }] = useMutation(CREATE_POST_MUTATION, {
     variables: {
-      amount: parseFloat(note.amount),
+      //amount: parseFloat(note.amount),
+      amount: parseFloat(note.amount.toString().slice(1)),
       use: note.use,
       comments: note.comment,
-      date: note.date,
+      date: date.toLocaleDateString(),
     },
     update(_,result) {
-      console.log(result)
+      console.log(result.data);
     },
     onError(err){
-      console.log(err);
+      console.log(err.message);
+      console.log(err.networkError);
+      console.log(err.graphQLErrors);
+      console.log(err.name);
+      console.log(err.extraInfo);
     },
   })
 
@@ -51,78 +57,68 @@ function CreateArea(props) {
   }
 
   function submitNote(event) {
+    console.log("submitting....");
     //check if valid (required fields except the commment)
-    if(!note.amount || !note.date || !note.use){
+    if(!note.amount || !date || !note.use){
       setError ("All fields except comment must be filled");
       return;
     }
 
-    props.onAdd(note);
-    sendNote(note);
+    const newNote = {
+      amount: note.amount,
+      date: date.toLocaleDateString(),
+      use: note.use,
+      comment: note.comment
+    }
+    console.log(newNote);
+
+    props.onAdd(newNote);
+    sendNote(newNote);
     setNote({
       amount: 0,
-      date: "", 
       use: "",
       comment:"",
     });
+    setDate(new Date());
     setError("");
     
     event.preventDefault();
   }
 
-  // function expand() {
-  //   setExpanded(true);
-  // }
+
 
   return (
     <div>
       <form className="create-note">
-        {/* <textarea
-          name="amount"
-          // onClick={expand}
-          onChange={handleChange}
-          value={note.amount}
-          placeholder="Amount" 
-          startAdornment = {<p>$</p>}
-          rows={1}
-        />        */}
-        <InputLabel htmlFor="standard-adornment-amount">Amount</InputLabel>
-          <Input
-            name = "amount"
-            id="standard-adornment-amount"
-            value={note.amount==0 ? "": note.amount}
-            onChange={handleChange}
-            disableUnderline
-            startAdornment={<InputAdornment position="start">$</InputAdornment>}
-          />
-        <textarea
-          name="date"
-          // onClick={expand}
-          onChange={handleChange}
-          value={note.date}
-          placeholder="Date"
-          rows={1}
+        {/* <InputLabel htmlFor="standard-adornment-amount">Amount</InputLabel> */}
+        <CurrencyInput 
+        name = "amount"
+        value={note.amount} 
+        onChangeEvent={handleChange}
+        prefix="$"
+        thousandSeparator=""
         />
-        {/* <MuiPickersUtilsProvider utils={DateFnsUtils}>
-          <KeyboardDatePicker
-          name="date"
-          disableUnderline
-          clearable
-          value={date}
-          placeholder="10/10/2018"
-          onChange={date => setDate(date)}
-          maxDate={new Date()} 
-          format="MM/dd/yyyy"
-        />          
-        </MuiPickersUtilsProvider> */}
-
-
+        <TextField
+            id="date"
+            type="date"
+            validate
+            disableUnderline
+            defaultValue= {date}
+            InputLabelProps={{
+              shrink: true,
+            }}
+            InputProps={{
+               disableUnderline: true,
+               min: "2021-03-01",
+               max: "2021-03-03",
+                }}
+          />
         <textarea
           name="use"
           // onClick={expand}
           onChange={handleChange}
           value={note.use}
-          placeholder="Use"
+          placeholder="Purpose"
           rows={1}
         />
         <textarea
@@ -130,13 +126,9 @@ function CreateArea(props) {
           // onClick={expand}
           onChange={handleChange}
           value={note.comment}
-          placeholder="Comment"
+          placeholder="(Comment)"
           rows={1}
         />
-
-
-
-          {/* <Fab onClick={(event) => {{submitNote(event)}; sendNote(event)}}> */}
           <Fab onClick={submitNote}>
             <AddIcon />
           </Fab>
@@ -157,7 +149,7 @@ mutation createRecord(
     amount: $amount
     use: $use
     date: $date
-    comments: $comments
+    comments: $comments 
   )
   {
       username
