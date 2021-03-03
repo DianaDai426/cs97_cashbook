@@ -24,8 +24,8 @@ function CreateArea(props) {
     comment:"",
   });
 
-  const [error, setError] = useState(""); 
-  
+  const [error, setError] = useState("");
+
   const [sendNote, { SendNote_error }] = useMutation(CREATE_POST_MUTATION, {
     variables: {
       //amount: parseFloat(note.amount),
@@ -81,7 +81,7 @@ function CreateArea(props) {
     });
     setDate(new Date());
     setError("");
-    
+
     event.preventDefault();
   }
 
@@ -91,9 +91,9 @@ function CreateArea(props) {
     <div>
       <form className="create-note">
         {/* <InputLabel htmlFor="standard-adornment-amount">Amount</InputLabel> */}
-        <CurrencyInput 
+        <CurrencyInput
         name = "amount"
-        value={note.amount} 
+        value={note.amount}
         onChangeEvent={handleChange}
         prefix="$"
         thousandSeparator=""
@@ -149,7 +149,7 @@ mutation createRecord(
     amount: $amount
     use: $use
     date: $date
-    comments: $comments 
+    comments: $comments
   )
   {
       username

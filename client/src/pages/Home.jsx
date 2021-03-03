@@ -16,9 +16,12 @@ function Home() {
   let arr = [];
   const [notes, setNotes] = useState(arr);
 
+/*
   const {loading, data: { getRecords : records} = {}} = useQuery(FETCH_RECORDS_QUERY, {
     variables: { userName }
   });
+  */
+  const {loading, data: { getRecordsByUse : records} = {}} = useQuery(FETCH_RECORDSUSE_QUERY);
   console.log(records);
   if(records){
     records.forEach(function(item){
@@ -89,8 +92,21 @@ function Home() {
 }
 
 export const FETCH_RECORDS_QUERY = gql`
-  query($userName: String!) {
-    getRecords(userName: $userName){
+  {
+    getRecords{
+      id
+      username
+      amount
+      use
+      comments
+      date
+    }
+  }
+`;
+
+export const FETCH_RECORDSUSE_QUERY = gql`
+  {
+    getRecordsByUse{
       id
       username
       amount
