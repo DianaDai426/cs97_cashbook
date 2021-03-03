@@ -10,6 +10,8 @@ import {
 import DateFnsUtils from '@date-io/date-fns';
 import { MuiPickersUtilsProvider, KeyboardDatePicker } from "@material-ui/pickers";
 import Alert from '@material-ui/lab/Alert';
+import gql from 'graphql-tag'
+import { useMutation } from '@apollo/react-hooks'
 
 function CreateArea(props) {
   //const [isExpanded, setExpanded] = useState(false);
@@ -22,6 +24,21 @@ function CreateArea(props) {
   });
 
   const [error, setError] = useState(""); 
+  
+  const [sendNote, { SendNote_error }] = useMutation(CREATE_POST_MUTATION, {
+    variables: {
+      amount: parseFloat(note.amount),
+      use: note.use,
+      comments: note.comment,
+      date: note.date,
+    },
+    update(_,result) {
+      console.log(result)
+    },
+    onError(err){
+      console.log(err);
+    },
+  })
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -41,13 +58,15 @@ function CreateArea(props) {
     }
 
     props.onAdd(note);
+    sendNote(note);
     setNote({
-      amount: "",
+      amount: 0,
       date: "", 
       use: "",
       comment:"",
     });
     setError("");
+    
     event.preventDefault();
   }
 
@@ -117,6 +136,7 @@ function CreateArea(props) {
 
 
 
+          {/* <Fab onClick={(event) => {{submitNote(event)}; sendNote(event)}}> */}
           <Fab onClick={submitNote}>
             <AddIcon />
           </Fab>
@@ -125,5 +145,26 @@ function CreateArea(props) {
     </div>
   );
 }
+
+const CREATE_POST_MUTATION = gql`
+mutation createRecord(
+  $amount: Float!
+  $use: String!
+  $date: String!
+  $comments: String!
+){
+  createRecord(
+    amount: $amount
+    use: $use
+    date: $date
+    comments: $comments
+  )
+  {
+      username
+      amount
+  }
+}
+`
+
 
 export default CreateArea;
