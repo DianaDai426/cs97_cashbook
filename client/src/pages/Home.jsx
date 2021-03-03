@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import Header from "../components/Header";
 import Note from "../components/Entry";
 import CreateArea from "../components/CreateArea";
-
+import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag';
 import {AuthContext} from '../context/auth';
 import { Grid } from "@material-ui/core";
@@ -12,6 +12,12 @@ function Home() {
   const {user} = useContext(AuthContext);
   const [notes, setNotes] = useState([]);
 
+  const {loading, data} = useQuery(FETCH_RECORDS_QUERY);
+
+  if(data)
+  {
+    console.log(data)
+  }
 
   function addNote(newNote) {
     setNotes(prevNotes => {
@@ -34,19 +40,21 @@ function Home() {
           <CreateArea onAdd={addNote} />
       )}
 
-      {notes.map((noteItem, index) => {
-        return (
-          <Note
-            key={index}
-            id={index}
-            amount={noteItem.amount}
-            date={noteItem.date}
-            use = {noteItem.use}
-            comment = {noteItem.comment}
-            onDelete={deleteNote}
-          />
-        );
-      })}
+
+      {(notes.map((noteItem, index) => {
+          return (
+            <Note
+              key={index}
+              id={index}
+              amount={noteItem.amount}
+              date={noteItem.date}
+              use = {noteItem.use}
+              comment = {noteItem.comment}
+              onDelete={deleteNote}
+            />
+          );
+        })
+      )}
     </div>
   );
 }
