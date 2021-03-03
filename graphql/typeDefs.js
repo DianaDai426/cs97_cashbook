@@ -21,7 +21,8 @@ module.exports = gql`
     confirmPassword: String!
   }
   type Query {
-    getRecords: [Record]
+    getRecords(userName: String!): [Record]
+    getAllRecords: [Record]
     getRecordsByUse: [Record]
     getRecordsByAmountIO: [Record]
     getRecordsByAmountDO: [Record]
