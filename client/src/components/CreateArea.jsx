@@ -6,17 +6,19 @@ import {
   InputLabel,
   InputAdornment,
   Input,
+  Form,
+  Row,
 } from "@material-ui/core";
 import DateFnsUtils from '@date-io/date-fns';
 import { MuiPickersUtilsProvider, KeyboardDatePicker } from "@material-ui/pickers";
 import Alert from '@material-ui/lab/Alert';
-
+import CurrencyInput from 'react-currency-input';
 function CreateArea(props) {
   //const [isExpanded, setExpanded] = useState(false);
-  const [date, setDate] = useState("");
+  const [date, setDate] = useState(new Date());
   const [note, setNote] = useState({
     amount: 0,
-    date: "", 
+    date: new Date(), 
     use: "", 
     comment:"",
   });
@@ -42,8 +44,8 @@ function CreateArea(props) {
 
     props.onAdd(note);
     setNote({
-      amount: "",
-      date: "", 
+      amount: 0,
+      date: new Date(), 
       use: "",
       comment:"",
     });
@@ -57,7 +59,28 @@ function CreateArea(props) {
 
   return (
     <div>
-      <form className="create-note">
+      <form className="create-note" inline>
+      <row>
+           <CurrencyInput 
+           name = "amount"
+           value={note.amount} 
+           onChangeEvent={handleChange}
+           placeholder="date"
+           prefix="$"
+           />
+        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+          <KeyboardDatePicker
+          name="date"
+          clearable
+          value={date}
+          placeholder="date"
+          onChange={date => setDate(date)}
+          maxDate={new Date()} 
+          format="MM/dd/yyyy"
+        />          
+        </MuiPickersUtilsProvider>
+
+      </row>
         {/* <textarea
           name="amount"
           // onClick={expand}
@@ -67,35 +90,27 @@ function CreateArea(props) {
           startAdornment = {<p>$</p>}
           rows={1}
         />        */}
-        <InputLabel htmlFor="standard-adornment-amount">Amount</InputLabel>
-          <Input
+        {/* <InputLabel htmlFor="standard-adornment-amount">Amount</InputLabel> */}
+          {/* <Input
             name = "amount"
+            type="number" 
+            pattern="^[0-9]"
+            step="0.01"
             id="standard-adornment-amount"
             value={note.amount==0 ? "": note.amount}
             onChange={handleChange}
             disableUnderline
             startAdornment={<InputAdornment position="start">$</InputAdornment>}
-          />
-        <textarea
+          /> */}
+           
+        {/* <textarea
           name="date"
           // onClick={expand}
           onChange={handleChange}
           value={note.date}
           placeholder="Date"
           rows={1}
-        />
-        {/* <MuiPickersUtilsProvider utils={DateFnsUtils}>
-          <KeyboardDatePicker
-          name="date"
-          disableUnderline
-          clearable
-          value={date}
-          placeholder="10/10/2018"
-          onChange={date => setDate(date)}
-          maxDate={new Date()} 
-          format="MM/dd/yyyy"
-        />          
-        </MuiPickersUtilsProvider> */}
+        /> */}
 
 
         <textarea
