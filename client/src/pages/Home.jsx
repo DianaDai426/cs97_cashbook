@@ -5,6 +5,7 @@ import CreateArea from "../components/CreateArea";
 
 import gql from 'graphql-tag';
 import {AuthContext} from '../context/auth';
+import { Grid } from "@material-ui/core";
 
 
 function Home() {
@@ -29,7 +30,10 @@ function Home() {
   return (
     <div>
       <Header />
-      <CreateArea onAdd={addNote} />
+      {user && (
+          <CreateArea onAdd={addNote} />
+      )}
+
       {notes.map((noteItem, index) => {
         return (
           <Note
