@@ -1,4 +1,4 @@
-import React, { useContext, useState} from "react";
+import React, { useContext, useState, useEffect} from "react";
 import Header from "../components/Header";
 import Note from "../components/Entry";
 import CreateArea from "../components/CreateArea";
@@ -14,12 +14,13 @@ function Home() {
   const userName = user ? user.username : '';
 
   let arr = [];
+  const [notes, setNotes] = useState(arr);
 
   const {loading, data: { getRecords : records} = {}} = useQuery(FETCH_RECORDS_QUERY, {
     variables: { userName }
   });
+  console.log(records);
   if(records){
-    console.log(records);
     records.forEach(function(item){
       arr.push({amount : item.amount,
                 date : item.date,
@@ -29,8 +30,11 @@ function Home() {
     });
   }
 
-  console.log(arr);
-  const [notes, setNotes] = useState(arr);
+  React.useEffect(() => {
+      if (records){
+        setNotes(arr);
+    }
+  }, [records])
 
 /*
   function DefaultRecord(userName){
