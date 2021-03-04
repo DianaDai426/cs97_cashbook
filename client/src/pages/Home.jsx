@@ -33,7 +33,7 @@ function Home() {
   */
 
   const {loading, data: { getRecords : records} = {}} = useQuery(FETCH_RECORDS_QUERY);
-  console.log(records);
+
   if(records){
     records.forEach(function(item){
       arr.push({amount : item.amount,
@@ -63,8 +63,6 @@ function Home() {
 
 
   function deleteNote(id) {
-    console.log(notes.recordId);
-    deleteRecord(id);
     setNotes(prevNotes => {
       return prevNotes.filter((noteItem, index) => {
         return index !== id;

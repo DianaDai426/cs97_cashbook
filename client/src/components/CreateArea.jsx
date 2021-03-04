@@ -79,18 +79,24 @@ function CreateArea(props) {
       setError ("All fields except comment must be filled");
       return;
     }
+    //console.log(note);
+    sendNote(note);
 
     const newNote = {
       amount: note.amount,
       date : note.date,
       //date: date.toLocaleDateString(),
       use: note.use,
-      comment: note.comment
+      comment: note.comment,
+      recordId: note.recordId,
     }
-    console.log(newNote);
-
+    
+    
     props.onAdd(newNote);
-    sendNote(newNote);
+    
+    //console.log("should have record in it now");
+    //console.log(newNote);
+
     setNote({
       amount: 0,
       use: "",
