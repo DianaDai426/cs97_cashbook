@@ -145,14 +145,14 @@ function Home() {
       <Header />
       {user && (
           <CreateArea onAdd={addNote} />
-      ) && (
+      )&& (
       <DropdownButton id="sortby-dropdown" title="Sort by">
         <Dropdown.Item as="button" onClick = {recordDate}>Date (default)</Dropdown.Item>
         <Dropdown.Item as="button" onClick = {recordUse}>By purpose</Dropdown.Item>
         <Dropdown.Item as="button" onClick = {recordAmIO}>Amount (increasing)</Dropdown.Item>
         <Dropdown.Item as="button" onClick = {recordAmDO}>Amount (decreasing)</Dropdown.Item>
       </DropdownButton>
-    )}
+      )}
 
       {user && (notes.map((noteItem, index) => {
           return (
