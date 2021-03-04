@@ -145,7 +145,8 @@ function Home() {
       <Header />
       {user && (
           <CreateArea onAdd={addNote} />
-      )&& (
+      )} 
+      {user && (
       <DropdownButton id="sortby-dropdown" title="Sort by">
         <Dropdown.Item as="button" onClick = {recordDate}>Date (default)</Dropdown.Item>
         <Dropdown.Item as="button" onClick = {recordUse}>By purpose</Dropdown.Item>
