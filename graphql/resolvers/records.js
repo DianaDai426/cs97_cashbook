@@ -54,10 +54,15 @@ module.exports = {
             const user = authCheck(context);
 
             if (use.trim() === '') {
-                throw new Error('Post body must not be empty');
+                throw new Error('Use must not be empty');
             }
             if (amount === 0) {
                 throw new Error('Amount should not be 0');
+            }
+            const regEx = /[0-9]{1,2}\/[0-9]{1,2}\/[0-9]{4}/;
+            if (!date.match(regEx)) {
+                console.log(date)
+                throw new Error('A date must be selected');
             }
 
             const newRecord = new Record({
@@ -78,10 +83,15 @@ module.exports = {
             const user = authCheck(context);
 
             if (use.trim() === '') {
-                throw new Error('Post body must not be empty');
+                throw new Error('Use must not be empty');
             }
             if (amount === 0) {
                 throw new Error('Amount should not be 0');
+            }
+            const regEx = /[0-9]{1,2}\/[0-9]{1,2}\/[0-9]{4}/;
+            if (!date.match(regEx)) {
+                console.log(date)
+                throw new Error('A date must be selected');
             }
 
             try {
