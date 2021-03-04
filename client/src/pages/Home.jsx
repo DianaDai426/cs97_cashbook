@@ -11,7 +11,6 @@ import { Grid } from "@material-ui/core";
 
 function Home() {
   const {user} = useContext(AuthContext);
-  const userName = user ? user.username : '';
 
   let arr = [];
   const [notes, setNotes] = useState([]);
@@ -32,6 +31,8 @@ function Home() {
                 date : item.date,
                 use : item.use,
                 comment: item.comments,
+                recordId: item.recordId,
+                userName: item.userName
               });
     });
   }
@@ -77,6 +78,8 @@ function Home() {
               date={noteItem.date}
               use = {noteItem.use}
               comment = {noteItem.comment}
+              recordId = {noteItem.recordId}
+              userName = {noteItem.userName}
               onDelete={deleteNote}
             />
           );
