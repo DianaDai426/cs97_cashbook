@@ -31,7 +31,7 @@ function Home() {
                       date : item.date,
                       use : item.use,
                       comment: item.comments,
-                      recordId: item._id,
+                      recordId: item.id,
                       userName: item.username
                     });
           });
@@ -52,7 +52,7 @@ function Home() {
                       date : item.date,
                       use : item.use,
                       comment: item.comments,
-                      recordId: item._id,
+                      recordId: item.id,
                       userName: item.username
                     });
           });
@@ -72,7 +72,7 @@ function Home() {
                       date : item.date,
                       use : item.use,
                       comment: item.comments,
-                      recordId: item._id,
+                      recordId: item.id,
                       userName: item.username
                     });
           });
@@ -92,7 +92,7 @@ function Home() {
                       date : item.date,
                       use : item.use,
                       comment: item.comments,
-                      recordId: item._id,
+                      recordId: item.id,
                       userName: item.username
                     });
           });
@@ -112,7 +112,7 @@ function Home() {
                       date : item.date,
                       use : item.use,
                       comment: item.comments,
-                      recordId: item._id,
+                      recordId: item.id,
                       userName: item.username
                     });
           });
