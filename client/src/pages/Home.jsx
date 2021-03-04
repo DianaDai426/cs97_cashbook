@@ -6,7 +6,7 @@ import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import {AuthContext} from '../context/auth';
 import { Grid } from "@material-ui/core";
-
+import { useMutation } from '@apollo/react-hooks';
 
 
 function Home() {
@@ -15,6 +15,15 @@ function Home() {
   let arr = [];
   const [notes, setNotes] = useState([]);
 
+  const [deleteRecord] = useMutation(DELETE_POST_MUTATION, {
+    variables: {
+      recordId: notes.recordId,
+    },
+    onError(err)
+    {
+      console.log(err);
+    },
+  })
 
   /*
   function DefaultRecords() {
@@ -54,6 +63,8 @@ function Home() {
 
 
   function deleteNote(id) {
+    console.log(notes.recordId);
+    deleteRecord(id);
     setNotes(prevNotes => {
       return prevNotes.filter((noteItem, index) => {
         return index !== id;
@@ -88,6 +99,16 @@ function Home() {
     </div>
   );
 }
+
+const DELETE_POST_MUTATION = gql`
+mutation deleteRecord(
+  $recordId: ID!
+){
+  deleteRecord(
+    recordId: $recordId
+  )
+}
+`
 
 export const FETCH_RECORDS_QUERY = gql`
   {

@@ -36,6 +36,10 @@ function CreateArea(props) {
     },
     update(_,result) {
       console.log(result.data);
+      console.log(result.data.createRecord.id);
+      console.log(note);
+      note.recordId = result.data.createRecord.id;
+      console.log(note);
     },
     onError(err){
       console.log(err.message);
@@ -165,6 +169,7 @@ mutation createRecord(
   {
       username
       amount
+      id
   }
 }
 `
