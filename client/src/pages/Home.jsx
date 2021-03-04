@@ -15,15 +15,7 @@ function Home() {
   let arr = [];
   const [notes, setNotes] = useState([]);
 
-  const [deleteRecord] = useMutation(DELETE_POST_MUTATION, {
-    variables: {
-      recordId: notes.recordId,
-    },
-    onError(err)
-    {
-      console.log(err);
-    },
-  })
+  
 
   /*
   function DefaultRecords() {
@@ -98,15 +90,6 @@ function Home() {
   );
 }
 
-const DELETE_POST_MUTATION = gql`
-mutation deleteRecord(
-  $recordId: ID!
-){
-  deleteRecord(
-    recordId: $recordId
-  )
-}
-`
 
 export const FETCH_RECORDS_QUERY = gql`
   {

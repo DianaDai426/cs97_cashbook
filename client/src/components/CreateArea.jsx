@@ -22,6 +22,7 @@ function CreateArea(props) {
     amount: 0,
     use: "",
     comment:"",
+    recordId:"asdf",
   });
 
   const [error, setError] = useState("");
@@ -29,7 +30,7 @@ function CreateArea(props) {
   const [sendNote, { SendNote_error }] = useMutation(CREATE_POST_MUTATION, {
     variables: {
       //amount: parseFloat(note.amount),
-      amount: parseFloat(note.amount.toString().slice(1)),
+      amount: parseFloat(note.amount),
       use: note.use,
       comments: note.comment,
       date: date.toLocaleDateString(),
@@ -40,6 +41,7 @@ function CreateArea(props) {
       console.log(note);
       note.recordId = result.data.createRecord.id;
       console.log(note);
+      submitNote();
     },
     onError(err){
       console.log(err.message);
@@ -49,6 +51,7 @@ function CreateArea(props) {
       console.log(err.extraInfo);
     },
   })
+
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -79,8 +82,6 @@ function CreateArea(props) {
       setError ("All fields except comment must be filled");
       return;
     }
-    //console.log(note);
-    sendNote(note);
 
     const newNote = {
       amount: note.amount,
@@ -91,11 +92,10 @@ function CreateArea(props) {
       recordId: note.recordId,
     }
     
-    
     props.onAdd(newNote);
     
-    //console.log("should have record in it now");
-    //console.log(newNote);
+    console.log("should have record in it now");
+    console.log(newNote);
 
     setNote({
       amount: 0,
@@ -150,7 +150,7 @@ function CreateArea(props) {
           placeholder="(Comment)"
           rows={1}
         />
-          <Fab onClick={submitNote}>
+          <Fab onClick={sendNote}>
             <AddIcon />
           </Fab>
         {error && <Alert variant="outlined" severity="warning">{error}</Alert>}
