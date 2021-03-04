@@ -22,12 +22,13 @@ function CreateArea(props) {
     amount: 0,
     use: "",
     comment:"",
-    recordId:"asdf",
+    recordId:"",
   });
 
   const [error, setError] = useState("");
 
   const [sendNote, { SendNote_error }] = useMutation(CREATE_POST_MUTATION, {
+    
     variables: {
       //amount: parseFloat(note.amount),
       amount: parseFloat(note.amount),
@@ -52,6 +53,10 @@ function CreateArea(props) {
     },
   })
 
+  function callOrder(event) {
+    sendNote();
+    event.preventDefault();
+  }
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -75,7 +80,7 @@ function CreateArea(props) {
     });
  };
 
-  function submitNote(event) {
+  function submitNote() {
     console.log("submitting....");
     //check if valid (required fields except the commment)
     if(!note.amount || !date || !note.use){
@@ -85,7 +90,7 @@ function CreateArea(props) {
 
     const newNote = {
       amount: note.amount,
-      date : note.date,
+      date: note.date,
       //date: date.toLocaleDateString(),
       use: note.use,
       comment: note.comment,
@@ -101,11 +106,11 @@ function CreateArea(props) {
       amount: 0,
       use: "",
       comment:"",
+      recordId: "",
     });
     setDate(new Date());
     setError("");
 
-    event.preventDefault();
   }
 
 
@@ -150,7 +155,7 @@ function CreateArea(props) {
           placeholder="(Comment)"
           rows={1}
         />
-          <Fab onClick={sendNote}>
+          <Fab onClick={callOrder}>
             <AddIcon />
           </Fab>
         {error && <Alert variant="outlined" severity="warning">{error}</Alert>}
