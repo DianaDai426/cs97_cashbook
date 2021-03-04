@@ -17,7 +17,7 @@ function Note(props) {
 
   function handleClick() {
     props.onDelete(props.id);
-    console.log(props.amount);
+    console.log(props.recordId);
     deleteRecord();
   }
 

@@ -8,13 +8,13 @@ import {
   Input,
   TextField,
 } from "@material-ui/core";
-import DateFnsUtils from '@date-io/date-fns';
-import { MuiPickersUtilsProvider, KeyboardDatePicker } from "@material-ui/pickers";
+//import DateFnsUtils from '@date-io/date-fns';
+//import { MuiPickersUtilsProvider, KeyboardDatePicker } from "@material-ui/pickers";
 import Alert from '@material-ui/lab/Alert';
 import gql from 'graphql-tag'
 import { useMutation } from '@apollo/react-hooks';
 import CurrencyInput from 'react-currency-input-field';
-import DatePicker from "react-datepicker";
+//import DatePicker from "react-datepicker";
 function CreateArea(props) {
   //const [isExpanded, setExpanded] = useState(false);
   const [date, setDate] = useState(new Date());

@@ -31,8 +31,8 @@ function Home() {
                       date : item.date,
                       use : item.use,
                       comment: item.comments,
-                      recordId: item.recordId,
-                      userName: item.userName
+                      recordId: item._id,
+                      userName: item.username
                     });
           });
         }
@@ -52,8 +52,8 @@ function Home() {
                       date : item.date,
                       use : item.use,
                       comment: item.comments,
-                      recordId: item.recordId,
-                      userName: item.userName
+                      recordId: item._id,
+                      userName: item.username
                     });
           });
         }
@@ -72,8 +72,8 @@ function Home() {
                       date : item.date,
                       use : item.use,
                       comment: item.comments,
-                      recordId: item.recordId,
-                      userName: item.userName
+                      recordId: item._id,
+                      userName: item.username
                     });
           });
         }
@@ -92,8 +92,8 @@ function Home() {
                       date : item.date,
                       use : item.use,
                       comment: item.comments,
-                      recordId: item.recordId,
-                      userName: item.userName
+                      recordId: item._id,
+                      userName: item.username
                     });
           });
         }
@@ -112,8 +112,8 @@ function Home() {
                       date : item.date,
                       use : item.use,
                       comment: item.comments,
-                      recordId: item.recordId,
-                      userName: item.userName
+                      recordId: item._id,
+                      userName: item.username
                     });
           });
         }
