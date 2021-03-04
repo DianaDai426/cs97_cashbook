@@ -68,7 +68,7 @@ function Home() {
       )}
 
 
-      {(notes.map((noteItem, index) => {
+      {user && (notes.map((noteItem, index) => {
           return (
             <Note
               key={index}
