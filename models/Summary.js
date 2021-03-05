@@ -7,7 +7,8 @@ const summarySchema = new Schema({
     health: Number,
     transport: Number,
     entertainment: Number,
-    other: Number
+    other: Number,
+    sum: Number
 });
 
 module.exports = model('Summary', summarySchema);

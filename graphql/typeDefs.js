@@ -23,6 +23,7 @@ module.exports = gql`
     transport: Float!
     entertainment: Float!
     other: Float!
+    sum: Float!
   }
   input RegisterInput {
     username: String!
