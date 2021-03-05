@@ -36,20 +36,19 @@ function Home() {
                     });
           });
         }
-        setNotes(arr);
+        setNotes([...arr]);
     }
   });
-  console.log(records);
-  console.log("userName is " + userName);
-  if(records){
-    records.forEach(function(item){
-      arr.push({amount : item.amount,
-                date : item.date,
-                use : item.use,
-                comment: item.comments,
-              });
-    });
-  }
+  // console.log(records);
+  // if(records){
+  //   records.forEach(function(item){
+  //     arr.push({amount : item.amount,
+  //               date : item.date,
+  //               use : item.use,
+  //               comment: item.comments,
+  //             });
+  //   });
+  // }
 
 
   /*Sort by date (the latest comes first)*/
@@ -135,10 +134,9 @@ function Home() {
 
 
   function addNote(newNote) {
-    setNotes(prevNotes => {
-      return [...prevNotes, newNote];
-    });
-  }
+    setNotes([newNote, ...notes ])
+    }
+
 
 
 

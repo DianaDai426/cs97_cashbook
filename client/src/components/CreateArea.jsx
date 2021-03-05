@@ -2,6 +2,10 @@ import React, { Fragment, useState } from "react";
 import AddIcon from "@material-ui/icons/Add";
 import {
   Fab,
+  Zoom,
+  InputLabel,
+  InputAdornment,
+  Input,
   TextField,
 } from "@material-ui/core";
 //import DateFnsUtils from '@date-io/date-fns';
@@ -10,10 +14,11 @@ import Alert from '@material-ui/lab/Alert';
 import gql from 'graphql-tag'
 import { useMutation } from '@apollo/react-hooks';
 import CurrencyInput from 'react-currency-input-field';
+import Moment from 'moment';
 //import DatePicker from "react-datepicker";
 function CreateArea(props) {
   //const [isExpanded, setExpanded] = useState(false);
-  const [date, setDate] = useState(new Date());
+  const [date, setDate] = useState(null);
   const [note, setNote] = useState({
     amount: 0,
     use: "",
@@ -26,11 +31,10 @@ function CreateArea(props) {
   const [sendNote, { SendNote_error }] = useMutation(CREATE_POST_MUTATION, {
     
     variables: {
-      //amount: parseFloat(note.amount),
       amount: parseFloat(note.amount),
       use: note.use,
       comments: note.comment,
-      date: date.toLocaleDateString(),
+      date: date? Moment(date).format("MM/DD/YYYY"): null
     },
     update(_,result) {
       console.log(result.data);
@@ -64,6 +68,12 @@ function CreateArea(props) {
     });
   }
 
+  function handleDateChange(event){
+    console.log("change date to", event.target.value);
+    setDate(event.target.value);
+  }
+
+  
   const handleOnValueChange = (value: string | undefined): void => {
     if(value === undefined){
       value = "0";
@@ -77,24 +87,25 @@ function CreateArea(props) {
  };
 
   function submitNote() {
-    console.log("submitting....");
+    console.log("validating....");
     //check if valid (required fields except the commment)
     if(!note.amount || !date || !note.use){
       setError ("All fields except comment must be filled");
       return;
     }
-
+    console.log("current date is", date);
+    console.log("current date is", Moment(date).format('MM/DD/YYYY'));
+    sendNote();
     const newNote = {
       amount: note.amount,
-      date: note.date,
-      //date: date.toLocaleDateString(),
+      date: date? Moment(date).format('MM/DD/YYYY'): null,
       use: note.use,
       comment: note.comment,
       recordId: note.recordId,
     }
     
     props.onAdd(newNote);
-    
+
     console.log("should have record in it now");
     console.log(newNote);
 
@@ -104,7 +115,7 @@ function CreateArea(props) {
       comment:"",
       recordId: "",
     });
-    setDate(new Date());
+    setDate(null);
     setError("");
 
   }
@@ -114,7 +125,6 @@ function CreateArea(props) {
   return (
     <div>
       <form className="create-note">
-        {/* <InputLabel htmlFor="standard-adornment-amount">Amount</InputLabel> */}
         <CurrencyInput
         name = "amount"
         value={note.amount}
@@ -125,14 +135,13 @@ function CreateArea(props) {
         <TextField
             id="date"
             type="date"
-            defaultValue= {date}
+            defaultValue= {null}
             InputLabelProps={{
               shrink: true,
             }}
+            onChange = {handleDateChange}
             InputProps={{
                disableUnderline: true,
-               min: "2021-03-01",
-               max: "2021-03-03",
                 }}
           />
         <textarea
@@ -149,7 +158,7 @@ function CreateArea(props) {
           placeholder="(Comment)"
           rows={1}
         />
-          <Fab onClick={callOrder}>
+          <Fab onClick={submitNote}>
             <AddIcon />
           </Fab>
         {error && <Alert variant="outlined" severity="warning">{error}</Alert>}
