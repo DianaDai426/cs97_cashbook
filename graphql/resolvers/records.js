@@ -1,16 +1,17 @@
 const { AuthenticationError, UserInputError } = require('apollo-server');
 
 const Record = require('../../models/Record');
+const Summary = require('../../models/Summary');
 const authCheck = require('../../util/auth-check');
 
 module.exports = {
     Query: {
         //Sort by date (the latest comes first)
         //Default mode
-        async getRecords(_, {userName}) {
+        async getRecords(_, { }, context) {
+            const user = authCheck(context);
             try {
-                const records = await Record.find({ username: userName}).sort({ date: -1 });
-
+                const records = await Record.find({ username: user.username }).sort({ date: -1 });
                 return records;
             } catch (err) {
                 throw new Error(err);
@@ -48,16 +49,69 @@ module.exports = {
                 throw new Error(err);
             }
         },
+
+        async getSummary(_, { }, context) {
+            const user = authCheck(context);
+            try {
+                const newSummary = new Summary({
+                    food: 0,
+                    clothing: 0,
+                    housing: 0,
+                    health: 0,
+                    transport: 0,
+                    entertainment: 0,
+                    other: 0
+                });
+                var i;
+                const food = await Record.find({ username: user.username, use: "food" });
+                for (i = 0; i < food.length; i++) {
+                    newSummary.food += food[i].amount;
+                }
+                const clothing = await Record.find({ username: user.username, use: "clothing" });
+                for (i = 0; i < clothing.length; i++) {
+                    newSummary.clothing += clothing[i].amount;
+                }
+                const housing = await Record.find({ username: user.username, use: "housing" });
+                for (i = 0; i < housing.length; i++) {
+                    newSummary.housing += housing[i].amount;
+                }
+                const health = await Record.find({ username: user.username, use: "health" });
+                for (i = 0; i < health.length; i++) {
+                    newSummary.health += health[i].amount;
+                }
+                const transport = await Record.find({ username: user.username, use: "transport" });
+                for (i = 0; i < transport.length; i++) {
+                    newSummary.transport += transport[i].amount;
+                }
+                const entertainment = await Record.find({ username: user.username, use: "entertainment" });
+                for (i = 0; i < entertainment.length; i++) {
+                    newSummary.entertainment += entertainment[i].amount;
+                }
+                const other = await Record.find({ username: user.username, use: "other" });
+                for (i = 0; i < other.length; i++) {
+                    newSummary.other += other[i].amount;
+                }
+                const summary = await newSummary.save();
+                return summary;
+            } catch (err) {
+                throw new Error(err);
+            }
+        },
     },
     Mutation: {
         async createRecord(_, { amount, use, date, comments }, context) {
             const user = authCheck(context);
 
             if (use.trim() === '') {
-                throw new Error('Post body must not be empty');
+                throw new Error('Use must not be empty');
             }
             if (amount === 0) {
                 throw new Error('Amount should not be 0');
+            }
+            const regEx = /[0-9]{1,2}\/[0-9]{1,2}\/[0-9]{4}/;
+            if (!date.match(regEx)) {
+                console.log(date)
+                throw new Error('A date must be selected');
             }
 
             const newRecord = new Record({
@@ -78,10 +132,15 @@ module.exports = {
             const user = authCheck(context);
 
             if (use.trim() === '') {
-                throw new Error('Post body must not be empty');
+                throw new Error('Use must not be empty');
             }
             if (amount === 0) {
                 throw new Error('Amount should not be 0');
+            }
+            const regEx = /[0-9]{1,2}\/[0-9]{1,2}\/[0-9]{4}/;
+            if (!date.match(regEx)) {
+                console.log(date)
+                throw new Error('A date must be selected');
             }
 
             try {

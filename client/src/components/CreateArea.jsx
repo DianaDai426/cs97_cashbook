@@ -4,32 +4,41 @@ import {
   Fab,
   TextField,
 } from "@material-ui/core";
+//import DateFnsUtils from '@date-io/date-fns';
+//import { MuiPickersUtilsProvider, KeyboardDatePicker } from "@material-ui/pickers";
 import Alert from '@material-ui/lab/Alert';
 import gql from 'graphql-tag'
 import { useMutation } from '@apollo/react-hooks';
-import CurrencyInput from 'react-currency-input';
-
+import CurrencyInput from 'react-currency-input-field';
+//import DatePicker from "react-datepicker";
 function CreateArea(props) {
   //const [isExpanded, setExpanded] = useState(false);
   const [date, setDate] = useState(new Date());
   const [note, setNote] = useState({
     amount: 0,
-    use: "", 
+    use: "",
     comment:"",
+    recordId:"",
   });
 
-  const [error, setError] = useState(""); 
-  
+  const [error, setError] = useState("");
+
   const [sendNote, { SendNote_error }] = useMutation(CREATE_POST_MUTATION, {
+    
     variables: {
       //amount: parseFloat(note.amount),
-      amount: parseFloat(note.amount.toString().slice(1)),
+      amount: parseFloat(note.amount),
       use: note.use,
       comments: note.comment,
       date: date.toLocaleDateString(),
     },
     update(_,result) {
       console.log(result.data);
+      console.log(result.data.createRecord.id);
+      console.log(note);
+      note.recordId = result.data.createRecord.id;
+      console.log(note);
+      submitNote();
     },
     onError(err){
       console.log(err.message);
@@ -39,6 +48,11 @@ function CreateArea(props) {
       console.log(err.extraInfo);
     },
   })
+
+  function callOrder(event) {
+    sendNote();
+    event.preventDefault();
+  }
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -50,7 +64,19 @@ function CreateArea(props) {
     });
   }
 
-  function submitNote(event) {
+  const handleOnValueChange = (value: string | undefined): void => {
+    if(value === undefined){
+      value = "0";
+    }
+    setNote(prevNote => {
+      return {
+        ...prevNote,
+        ["amount"]: value
+      };
+    });
+ };
+
+  function submitNote() {
     console.log("submitting....");
     //check if valid (required fields except the commment)
     if(!note.amount || !date || !note.use){
@@ -60,23 +86,27 @@ function CreateArea(props) {
 
     const newNote = {
       amount: note.amount,
-      date: date.toLocaleDateString(),
+      date: note.date,
+      //date: date.toLocaleDateString(),
       use: note.use,
-      comment: note.comment
+      comment: note.comment,
+      recordId: note.recordId,
     }
+    
+    props.onAdd(newNote);
+    
+    console.log("should have record in it now");
     console.log(newNote);
 
-    props.onAdd(newNote);
-    sendNote(newNote);
     setNote({
       amount: 0,
       use: "",
       comment:"",
+      recordId: "",
     });
     setDate(new Date());
     setError("");
-    
-    event.preventDefault();
+
   }
 
 
@@ -85,12 +115,12 @@ function CreateArea(props) {
     <div>
       <form className="create-note">
         {/* <InputLabel htmlFor="standard-adornment-amount">Amount</InputLabel> */}
-        <CurrencyInput 
+        <CurrencyInput
         name = "amount"
-        value={note.amount} 
-        onChangeEvent={handleChange}
+        value={note.amount}
+        onValueChange={handleOnValueChange}
         prefix="$"
-        thousandSeparator=""
+        groupSeparator=""
         />
         <TextField
             id="date"
@@ -119,7 +149,7 @@ function CreateArea(props) {
           placeholder="(Comment)"
           rows={1}
         />
-          <Fab onClick={submitNote}>
+          <Fab onClick={callOrder}>
             <AddIcon />
           </Fab>
         {error && <Alert variant="outlined" severity="warning">{error}</Alert>}
@@ -139,11 +169,12 @@ mutation createRecord(
     amount: $amount
     use: $use
     date: $date
-    comments: $comments 
+    comments: $comments
   )
   {
       username
       amount
+      id
   }
 }
 `

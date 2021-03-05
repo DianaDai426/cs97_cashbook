@@ -3,21 +3,41 @@ import Header from "../components/Header";
 import Note from "../components/Entry";
 import CreateArea from "../components/CreateArea";
 import { useQuery } from '@apollo/react-hooks';
-import gql from 'graphql-tag';
+import { useLazyQuery } from '@apollo/client';
 import {AuthContext} from '../context/auth';
 import { Grid } from "@material-ui/core";
+import { Dropdown, MenuItem} from "react-bootstrap";
+import DropdownButton from 'react-bootstrap/DropdownButton'
+import { FETCH_RECORDS_QUERY, FETCH_RECORDSUSE_QUERY,
+  FETCH_RECORDSAMOUNTIO_QUERY, FETCH_RECORDSAMOUNTDO_QUERY } from '../util/graphql';
 
 
 
 function Home() {
   const {user} = useContext(AuthContext);
-  const userName = user ? user.username : '';
 
-  let arr = [];
-  const [notes, setNotes] = useState(arr);
 
-  const {loading, data: { getRecords : records} = {}} = useQuery(FETCH_RECORDS_QUERY, {
-    variables: { userName }
+  const [notes, setNotes] = useState([]);
+
+  /*default records*/
+  const  {data: { getRecords : records} = {}} = useQuery(FETCH_RECORDS_QUERY, {
+    fetchPolicy: "network-only",
+    onCompleted(){
+        //console.log('fuck you')
+        let arr = [];
+        if(records){
+          records.forEach(function(item){
+            arr.push({amount : item.amount,
+                      date : item.date,
+                      use : item.use,
+                      comment: item.comments,
+                      recordId: item.id,
+                      userName: item.username
+                    });
+          });
+        }
+        setNotes(arr);
+    }
   });
   console.log(records);
   console.log("userName is " + userName);
@@ -31,20 +51,88 @@ function Home() {
     });
   }
 
-  React.useEffect(() => {
-      if (records){
+
+  /*Sort by date (the latest comes first)*/
+  const  [recordDate,{data: { getRecords : recordsDate} = {}}] = useLazyQuery(FETCH_RECORDS_QUERY, {
+    fetchPolicy: "network-only",
+    onCompleted(){
+        let arr = [];
+        if(recordsDate){
+          recordsDate.forEach(function(item){
+            arr.push({amount : item.amount,
+                      date : item.date,
+                      use : item.use,
+                      comment: item.comments,
+                      recordId: item.id,
+                      userName: item.username
+                    });
+          });
+        }
         setNotes(arr);
     }
-  }, [records])
+  });
 
-/*
-  function DefaultRecord(userName){
-    const {loading, data: { getRecords : records} = {}} = useQuery(FETCH_RECORDS_QUERY, {
-      variables: { userName }
-    });
-    return records;
-  }
-*/
+  /* fetch by Use*/
+  const  [recordUse,{data: { getRecordsByUse : recordsUse} = {}}] = useLazyQuery(FETCH_RECORDSUSE_QUERY, {
+    fetchPolicy: "network-only",
+    onCompleted(){
+        let arr = [];
+        if(recordsUse){
+          recordsUse.forEach(function(item){
+            arr.push({amount : item.amount,
+                      date : item.date,
+                      use : item.use,
+                      comment: item.comments,
+                      recordId: item.id,
+                      userName: item.username
+                    });
+          });
+        }
+        setNotes(arr);
+    }
+  });
+
+  /*Sort by amount (increasing order)*/
+  const  [recordAmIO,{data: { getRecordsByAmountIO : recordsAmIO} = {}}] = useLazyQuery(FETCH_RECORDSAMOUNTIO_QUERY, {
+    fetchPolicy: "network-only",
+    onCompleted(){
+        let arr = [];
+        if(recordsAmIO){
+          recordsAmIO.forEach(function(item){
+            arr.push({amount : item.amount,
+                      date : item.date,
+                      use : item.use,
+                      comment: item.comments,
+                      recordId: item.id,
+                      userName: item.username
+                    });
+          });
+        }
+        setNotes(arr);
+    }
+  });
+
+  /* Sort by amount (decreasing order) */
+  const  [recordAmDO,{data: { getRecordsByAmountDO : recordsAmDO} = {}}] = useLazyQuery(FETCH_RECORDSAMOUNTDO_QUERY, {
+    fetchPolicy: "network-only",
+    onCompleted(){
+        let arr = [];
+        if(recordsAmDO){
+          recordsAmDO.forEach(function(item){
+            arr.push({amount : item.amount,
+                      date : item.date,
+                      use : item.use,
+                      comment: item.comments,
+                      recordId: item.id,
+                      userName: item.username
+                    });
+          });
+        }
+        setNotes(arr);
+    }
+  });
+
+
 
   function addNote(newNote) {
     setNotes(prevNotes => {
@@ -68,10 +156,17 @@ function Home() {
       <Header />
       {user && (
           <CreateArea onAdd={addNote} />
+      )} 
+      {user && (
+      <DropdownButton id="sortby-dropdown" title="Sort by">
+        <Dropdown.Item as="button" onClick = {recordDate}>Date (default)</Dropdown.Item>
+        <Dropdown.Item as="button" onClick = {recordUse}>By purpose</Dropdown.Item>
+        <Dropdown.Item as="button" onClick = {recordAmIO}>Amount (increasing)</Dropdown.Item>
+        <Dropdown.Item as="button" onClick = {recordAmDO}>Amount (decreasing)</Dropdown.Item>
+      </DropdownButton>
       )}
 
-
-      {(notes.map((noteItem, index) => {
+      {user && (notes.map((noteItem, index) => {
           return (
             <Note
               key={index}
@@ -80,6 +175,8 @@ function Home() {
               date={noteItem.date}
               use = {noteItem.use}
               comment = {noteItem.comment}
+              recordId = {noteItem.recordId}
+              userName = {noteItem.userName}
               onDelete={deleteNote}
             />
           );
@@ -89,18 +186,7 @@ function Home() {
   );
 }
 
-export const FETCH_RECORDS_QUERY = gql`
-  query($userName: String!) {
-    getRecords(userName: $userName){
-      id
-      username
-      amount
-      use
-      comments
-      date
-    }
-  }
-`;
+
 
 
 export default Home;
