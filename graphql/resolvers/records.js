@@ -1,6 +1,7 @@
 const { AuthenticationError, UserInputError } = require('apollo-server');
 
 const Record = require('../../models/Record');
+const Summary = require('../../models/Summary');
 const authCheck = require('../../util/auth-check');
 
 module.exports = {
@@ -10,7 +11,7 @@ module.exports = {
         async getRecords(_, { }, context) {
             const user = authCheck(context);
             try {
-                const records = await Record.find({ username: user.username}).sort({ date: -1 });
+                const records = await Record.find({ username: user.username }).sort({ date: -1 });
                 return records;
             } catch (err) {
                 throw new Error(err);
@@ -44,6 +45,54 @@ module.exports = {
             try {
                 const records = await Record.find({ username: user.username }).sort({ amount: -1 });
                 return records;
+            } catch (err) {
+                throw new Error(err);
+            }
+        },
+
+        async getSummary(_, { }, context) {
+            const user = authCheck(context);
+            try {
+                const newSummary = new Summary({
+                    food: 0,
+                    clothing: 0,
+                    housing: 0,
+                    health: 0,
+                    transport: 0,
+                    entertainment: 0,
+                    other: 0
+                });
+                var i;
+                const food = await Record.find({ username: user.username, use: "food" });
+                for (i = 0; i < food.length; i++) {
+                    newSummary.food += food[i].amount;
+                }
+                const clothing = await Record.find({ username: user.username, use: "clothing" });
+                for (i = 0; i < clothing.length; i++) {
+                    newSummary.clothing += clothing[i].amount;
+                }
+                const housing = await Record.find({ username: user.username, use: "housing" });
+                for (i = 0; i < housing.length; i++) {
+                    newSummary.housing += housing[i].amount;
+                }
+                const health = await Record.find({ username: user.username, use: "health" });
+                for (i = 0; i < health.length; i++) {
+                    newSummary.health += health[i].amount;
+                }
+                const transport = await Record.find({ username: user.username, use: "transport" });
+                for (i = 0; i < transport.length; i++) {
+                    newSummary.transport += transport[i].amount;
+                }
+                const entertainment = await Record.find({ username: user.username, use: "entertainment" });
+                for (i = 0; i < entertainment.length; i++) {
+                    newSummary.entertainment += entertainment[i].amount;
+                }
+                const other = await Record.find({ username: user.username, use: "other" });
+                for (i = 0; i < other.length; i++) {
+                    newSummary.other += other[i].amount;
+                }
+                const summary = await newSummary.save();
+                return summary;
             } catch (err) {
                 throw new Error(err);
             }
