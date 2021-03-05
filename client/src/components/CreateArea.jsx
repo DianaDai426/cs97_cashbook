@@ -2,23 +2,17 @@ import React, { Fragment, useState } from "react";
 import AddIcon from "@material-ui/icons/Add";
 import {
   Fab,
-  Zoom,
-  InputLabel,
-  InputAdornment,
-  Input,
   TextField,
 } from "@material-ui/core";
-//import DateFnsUtils from '@date-io/date-fns';
-//import { MuiPickersUtilsProvider, KeyboardDatePicker } from "@material-ui/pickers";
+
 import Alert from '@material-ui/lab/Alert';
 import gql from 'graphql-tag'
 import { useMutation } from '@apollo/react-hooks';
 import CurrencyInput from 'react-currency-input-field';
 import Moment from 'moment';
-//import DatePicker from "react-datepicker";
+
 function CreateArea(props) {
-  //const [isExpanded, setExpanded] = useState(false);
-  const [date, setDate] = useState(null);
+  const [date, setDate] = useState("");
   const [note, setNote] = useState({
     amount: 0,
     use: "",
@@ -29,20 +23,19 @@ function CreateArea(props) {
   const [error, setError] = useState("");
 
   const [sendNote, { SendNote_error }] = useMutation(CREATE_POST_MUTATION, {
-    
     variables: {
       amount: parseFloat(note.amount),
       use: note.use,
       comments: note.comment,
-      date: date? Moment(date).format("MM/DD/YYYY"): null
+      date: date? Moment(date).format("MM/DD/YYYY"): ""
     },
     update(_,result) {
       console.log(result.data);
       console.log(result.data.createRecord.id);
       console.log(note);
       note.recordId = result.data.createRecord.id;
-      console.log(note);
-      submitNote();
+      console.log("hello world");
+      //submitNote();
     },
     onError(err){
       console.log(err.message);
@@ -53,10 +46,10 @@ function CreateArea(props) {
     },
   })
 
-  function callOrder(event) {
-    sendNote();
-    event.preventDefault();
-  }
+  // function callOrder(event) {
+  //   sendNote();
+  //   event.preventDefault();
+  // }
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -88,39 +81,40 @@ function CreateArea(props) {
 
   function submitNote() {
     console.log("validating....");
+
     //check if valid (required fields except the commment)
     if(!note.amount || !date || !note.use){
       setError ("All fields except comment must be filled");
       return;
     }
-    console.log("current date is", date);
-    console.log("current date is", Moment(date).format('MM/DD/YYYY'));
+
+    //if nothing is empty sent to backend
     sendNote();
+
+    //create and add newNote to store in Home
     const newNote = {
       amount: note.amount,
-      date: date? Moment(date).format('MM/DD/YYYY'): null,
+      date: date? Moment(date).format('MM/DD/YYYY'): "",
       use: note.use,
       comment: note.comment,
       recordId: note.recordId,
     }
     
     props.onAdd(newNote);
-
     console.log("should have record in it now");
     console.log(newNote);
 
+    //set back to default value
     setNote({
       amount: 0,
       use: "",
       comment:"",
       recordId: "",
     });
-    setDate(null);
+    setDate("");
     setError("");
 
   }
-
-
 
   return (
     <div>
@@ -136,6 +130,7 @@ function CreateArea(props) {
             id="date"
             type="date"
             defaultValue= {null}
+            value = {date}
             InputLabelProps={{
               shrink: true,
             }}
