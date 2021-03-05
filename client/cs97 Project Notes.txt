@@ -31,3 +31,24 @@ Emery - Has already created fundamental methods. Don't forget to change
 
 NEXT MEETING:
 THURSDAY, 3/4
+
+
+
+
+
+3/4 Meeting update:
+Implemented adding/deleting notes and connection to backend, small bug with calendar
+sort-button added (needs improved looks), login/logout / register pages completed,
+authorization of user completed
+
+TO-DO:
+- fix calendar
+- add summary page
+- add button to display summary page
+- purpose/usage option on note change to ==> dropdown options (easier to summary)
+- sort button looks
+
+Next meeting Tuesday 3/9 8:30pm:
+- write script for presentation
+- record presentation (or on wednesday)
+- maybe have a button or something to change the color scheme of the home page
