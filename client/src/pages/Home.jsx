@@ -13,18 +13,14 @@ function Home() {
   const {user} = useContext(AuthContext);
   const userName = user ? user.username : '';
 
-
-  const [notes, setNotes] = useState([]);
+  let arr = [];
+  const [notes, setNotes] = useState(arr);
 
   const {loading, data: { getRecords : records} = {}} = useQuery(FETCH_RECORDS_QUERY, {
     variables: { userName }
   });
-
-  React.useEffect(() => {
-  let arr = [];
-
-
   console.log(records);
+  console.log("userName is " + userName);
   if(records){
     records.forEach(function(item){
       arr.push({amount : item.amount,
@@ -33,10 +29,9 @@ function Home() {
                 comment: item.comments,
               });
     });
-    console.log(arr);
   }
 
-
+  React.useEffect(() => {
       if (records){
         setNotes(arr);
     }

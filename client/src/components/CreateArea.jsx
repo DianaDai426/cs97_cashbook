@@ -2,19 +2,13 @@ import React, { Fragment, useState } from "react";
 import AddIcon from "@material-ui/icons/Add";
 import {
   Fab,
-  Zoom,
-  InputLabel,
-  InputAdornment,
-  Input,
   TextField,
 } from "@material-ui/core";
-import DateFnsUtils from '@date-io/date-fns';
-import { MuiPickersUtilsProvider, KeyboardDatePicker } from "@material-ui/pickers";
 import Alert from '@material-ui/lab/Alert';
 import gql from 'graphql-tag'
 import { useMutation } from '@apollo/react-hooks';
 import CurrencyInput from 'react-currency-input';
-import DatePicker from "react-datepicker";
+
 function CreateArea(props) {
   //const [isExpanded, setExpanded] = useState(false);
   const [date, setDate] = useState(new Date());
@@ -113,7 +107,6 @@ function CreateArea(props) {
           />
         <textarea
           name="use"
-          // onClick={expand}
           onChange={handleChange}
           value={note.use}
           placeholder="Purpose"
@@ -121,7 +114,6 @@ function CreateArea(props) {
         />
         <textarea
           name="comment"
-          // onClick={expand}
           onChange={handleChange}
           value={note.comment}
           placeholder="(Comment)"
