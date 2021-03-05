@@ -60,36 +60,44 @@ module.exports = {
                     health: 0,
                     transport: 0,
                     entertainment: 0,
-                    other: 0
+                    other: 0,
+                    sum: 0
                 });
                 var i;
                 const food = await Record.find({ username: user.username, use: "food" });
                 for (i = 0; i < food.length; i++) {
                     newSummary.food += food[i].amount;
+                    newSummary.sum += food[i].amount;
                 }
                 const clothing = await Record.find({ username: user.username, use: "clothing" });
                 for (i = 0; i < clothing.length; i++) {
                     newSummary.clothing += clothing[i].amount;
+                    newSummary.sum += clothing[i].amount;
                 }
                 const housing = await Record.find({ username: user.username, use: "housing" });
                 for (i = 0; i < housing.length; i++) {
                     newSummary.housing += housing[i].amount;
+                    newSummary.sum += housing[i].amount;
                 }
                 const health = await Record.find({ username: user.username, use: "health" });
                 for (i = 0; i < health.length; i++) {
                     newSummary.health += health[i].amount;
+                    newSummary.sum += health[i].amount;
                 }
                 const transport = await Record.find({ username: user.username, use: "transport" });
                 for (i = 0; i < transport.length; i++) {
                     newSummary.transport += transport[i].amount;
+                    newSummary.sum += transport[i].amount;
                 }
                 const entertainment = await Record.find({ username: user.username, use: "entertainment" });
                 for (i = 0; i < entertainment.length; i++) {
                     newSummary.entertainment += entertainment[i].amount;
+                    newSummary.sum += entertainment[i].amount;
                 }
                 const other = await Record.find({ username: user.username, use: "other" });
                 for (i = 0; i < other.length; i++) {
                     newSummary.other += other[i].amount;
+                    newSummary.sum += other[i].amount;
                 }
                 const summary = await newSummary.save();
                 return summary;
