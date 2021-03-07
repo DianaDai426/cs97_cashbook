@@ -10,6 +10,7 @@ import gql from 'graphql-tag'
 import { useMutation } from '@apollo/react-hooks';
 import CurrencyInput from 'react-currency-input-field';
 import Moment from 'moment';
+import Select from 'react-select';
 
 function CreateArea(props) {
   const [date, setDate] = useState("");
@@ -21,6 +22,18 @@ function CreateArea(props) {
   });
 
   const [error, setError] = useState("");
+
+  /*for the purpose form*/
+  const options = [
+      { value: "food", label: "Food" },
+      { value: "clothing", label: "Clothing" },
+      { value: "housing", label: "Housing" },
+      { value: "health", label: "Health" },
+      { value: "transport", label: "Transportation" },
+      { value: "entertainment", label: "Entertainment" },
+      { value: "other", label: "Other" },
+    ];
+
 
   const [sendNote, { SendNote_error }] = useMutation(CREATE_POST_MUTATION, {
     variables: {
@@ -57,6 +70,16 @@ function CreateArea(props) {
       return {
         ...prevNote,
         [name]: value
+      };
+    });
+  }
+
+  function handleUseChange(event) {
+    let value = event.target;
+    setNote(prevNote => {
+      return {
+        ...prevNote,
+        ['use']: value
       };
     });
   }
@@ -142,16 +165,11 @@ function CreateArea(props) {
           />
         <div>
           <label>Purpose: </label>
-          <select name="use" onChange={handleChange}>
-            <option selected="selected"></option>
-            <option value="food">Food</option>
-            <option value="clothing">Clothing</option>
-            <option value="housing">Housing</option>
-            <option value="health">Health</option>
-            <option value="transport">Transportation</option>
-            <option value="entertainment">Entertainment</option>
-            <option value="other">Other</option>
-          </select>
+          <Select
+             name="use"
+             onChange={handleUseChange}
+             options={options}
+           />
         </div>
         <textarea
           name="comment"
