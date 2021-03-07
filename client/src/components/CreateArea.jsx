@@ -66,7 +66,7 @@ function CreateArea(props) {
     setDate(event.target.value);
   }
 
-  
+
   const handleOnValueChange = (value: string | undefined): void => {
     if(value === undefined){
       value = "0";
@@ -99,7 +99,7 @@ function CreateArea(props) {
       comment: note.comment,
       recordId: note.recordId,
     }
-    
+
     props.onAdd(newNote);
     console.log("should have record in it now");
     console.log(newNote);
@@ -126,6 +126,7 @@ function CreateArea(props) {
         prefix="$"
         groupSeparator=""
         />
+
         <TextField
             id="date"
             type="date"
@@ -139,13 +140,18 @@ function CreateArea(props) {
                disableUnderline: true,
                 }}
           />
-        <textarea
-          name="use"
-          onChange={handleChange}
-          value={note.use}
-          placeholder="Purpose"
-          rows={1}
-        />
+        <div>
+          <label>Purpose: </label>
+          <select name="use" onChange={handleChange}>
+            <option value="food">Food</option>
+            <option value="clothing">Clothing</option>
+            <option value="housing">Housing</option>
+            <option value="health">Health</option>
+            <option value="transport">Transportation</option>
+            <option value="entertainment">Entertainment</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
         <textarea
           name="comment"
           onChange={handleChange}
@@ -153,6 +159,7 @@ function CreateArea(props) {
           placeholder="(Comment)"
           rows={1}
         />
+
           <Fab onClick={submitNote}>
             <AddIcon />
           </Fab>

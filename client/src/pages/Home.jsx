@@ -6,7 +6,8 @@ import { useQuery } from '@apollo/react-hooks';
 import { useLazyQuery } from '@apollo/client';
 import {AuthContext} from '../context/auth';
 import { Grid } from "@material-ui/core";
-import { Dropdown, MenuItem} from "react-bootstrap";
+import { Button, Dropdown } from 'semantic-ui-react'
+//import { Dropdown, MenuItem} from "react-bootstrap";
 import DropdownButton from 'react-bootstrap/DropdownButton'
 import { FETCH_RECORDS_QUERY, FETCH_RECORDSUSE_QUERY,
   FETCH_RECORDSAMOUNTIO_QUERY, FETCH_RECORDSAMOUNTDO_QUERY } from '../util/graphql';
@@ -18,6 +19,12 @@ function Home() {
 
 
   const [notes, setNotes] = useState([]);
+
+  const options = [
+    { key: 1, text: 'Choice 1', value: 1 },
+    { key: 2, text: 'Choice 2', value: 2 },
+    { key: 3, text: 'Choice 3', value: 3 },
+  ]
 
   /*default records*/
   const  {data: { getRecords : records} = {}} = useQuery(FETCH_RECORDS_QUERY, {
@@ -154,15 +161,24 @@ function Home() {
       <Header />
       {user && (
           <CreateArea onAdd={addNote} />
-      )} 
-      {user && (
-      <DropdownButton id="sortby-dropdown" title="Sort by">
-        <Dropdown.Item as="button" onClick = {recordDate}>Date (default)</Dropdown.Item>
-        <Dropdown.Item as="button" onClick = {recordUse}>By purpose</Dropdown.Item>
-        <Dropdown.Item as="button" onClick = {recordAmIO}>Amount (increasing)</Dropdown.Item>
-        <Dropdown.Item as="button" onClick = {recordAmDO}>Amount (decreasing)</Dropdown.Item>
-      </DropdownButton>
       )}
+      <div>
+        {user && (
+          <Dropdown text='Sort by'>
+            <Dropdown.Menu>
+              <Dropdown.Item text='Date' description = 'default' onClick = {recordDate} />
+              <Dropdown.Item text='Purpose' description = 'alphabetical' onClick = {recordUse} />
+              <Dropdown.Item text='Amount' description = '(Increasing)' onClick = {recordAmIO} />
+              <Dropdown.Item text='Amount' description = '(Decreasing)' onClick = {recordAmDO} />
+            </Dropdown.Menu>
+          </Dropdown>
+        )}
+        {user && (
+            <button className="ui right floated olive button" >Summary</button>
+        )}
+      </div>
+
+
 
       {user && (notes.map((noteItem, index) => {
           return (
