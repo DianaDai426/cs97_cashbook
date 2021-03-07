@@ -29,8 +29,8 @@ function Home() {
   /*default records*/
   const  {data: { getRecords : records} = {}} = useQuery(FETCH_RECORDS_QUERY, {
     fetchPolicy: "network-only",
-    onCompleted(){
-        //console.log('fuck you')
+    onCompleted(){ 
+        //console.log('fuck you') //LOL who put this here
         let arr = [];
         if(records){
           records.forEach(function(item){

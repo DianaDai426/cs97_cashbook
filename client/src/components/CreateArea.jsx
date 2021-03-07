@@ -143,6 +143,7 @@ function CreateArea(props) {
         <div>
           <label>Purpose: </label>
           <select name="use" onChange={handleChange}>
+            <option selected="selected"></option>
             <option value="food">Food</option>
             <option value="clothing">Clothing</option>
             <option value="housing">Housing</option>
