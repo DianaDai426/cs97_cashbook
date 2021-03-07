@@ -22,7 +22,7 @@ function CreateArea(props) {
   });
 
   const [error, setError] = useState("");
-
+  const [someVal, setSomeVal] = useState('')
   /*for the purpose form*/
   const options = [
       { value: "food", label: "Food" },
@@ -75,11 +75,12 @@ function CreateArea(props) {
   }
 
   function handleUseChange(event) {
-    let value = event.target;
+    var value = event.value;
+    setSomeVal(value);
     setNote(prevNote => {
       return {
         ...prevNote,
-        ['use']: value
+        ["use"]: value
       };
     });
   }
@@ -130,7 +131,7 @@ function CreateArea(props) {
     //set back to default value
     setNote({
       amount: 0,
-      use: "",
+      use: someVal,
       comment:"",
       recordId: "",
     });
@@ -167,6 +168,7 @@ function CreateArea(props) {
           <label>Purpose: </label>
           <Select
              name="use"
+             defaultValue={{ label: "Select Purpose", value: someVal }}
              onChange={handleUseChange}
              options={options}
            />
