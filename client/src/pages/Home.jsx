@@ -7,14 +7,13 @@ import { useLazyQuery } from '@apollo/client';
 import {AuthContext} from '../context/auth';
 import { Grid } from "@material-ui/core";
 import { Button, Dropdown } from 'semantic-ui-react'
-//import { Dropdown, MenuItem} from "react-bootstrap";
 import DropdownButton from 'react-bootstrap/DropdownButton'
 import { FETCH_RECORDS_QUERY, FETCH_RECORDSUSE_QUERY,
   FETCH_RECORDSAMOUNTIO_QUERY, FETCH_RECORDSAMOUNTDO_QUERY } from '../util/graphql';
 
 
 
-function Home() {
+function Home(props) {
   const {user} = useContext(AuthContext);
 
 
@@ -138,6 +137,10 @@ function Home() {
     }
   });
 
+  function summaryButton() {
+    console.log('clicked sumamry');
+    props.history.push('/summary');
+  }
 
 
   function addNote(newNote) {
@@ -174,7 +177,7 @@ function Home() {
           </Dropdown>
         )}
         {user && (
-            <button className="ui right floated olive button" >Summary</button>
+            <button className="ui right floated olive button" onClick={summaryButton}>Summary</button>
         )}
       </div>
 
