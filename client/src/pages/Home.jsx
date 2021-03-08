@@ -153,7 +153,7 @@ function Home(props) {
       {user && (
           <CreateArea onAdd={addNote} />
       )}
-      <div>
+      <div id="operations">
         {user && (
           <Dropdown text='Sort by'>
             <Dropdown.Menu>
@@ -170,7 +170,7 @@ function Home(props) {
       </div>
 
 
-
+      <div className="note-board">
       {user && (notes.map((noteItem, index) => {
           return (
             <Note
@@ -187,6 +187,7 @@ function Home(props) {
           );
         })
       )}
+      </div>
     </div>
   );
 }
