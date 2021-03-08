@@ -28,8 +28,7 @@ function Home(props) {
   /*default records*/
   const  {data: { getRecords : records} = {}} = useQuery(FETCH_RECORDS_QUERY, {
     fetchPolicy: "network-only",
-    onCompleted(){ 
-        //console.log('fuck you') //LOL who put this here
+    onCompleted(){
         let arr = [];
         if(records){
           records.forEach(function(item){
@@ -45,17 +44,6 @@ function Home(props) {
         setNotes([...arr]);
     }
   });
-  // console.log(records);
-  // if(records){
-  //   records.forEach(function(item){
-  //     arr.push({amount : item.amount,
-  //               date : item.date,
-  //               use : item.use,
-  //               comment: item.comments,
-  //             });
-  //   });
-  // }
-
 
   /*Sort by date (the latest comes first)*/
   const  [recordDate,{data: { getRecords : recordsDate} = {}}] = useLazyQuery(FETCH_RECORDS_QUERY, {

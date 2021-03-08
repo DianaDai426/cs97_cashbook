@@ -51,3 +51,18 @@ export const FETCH_RECORDSAMOUNTDO_QUERY = gql`
     }
   }
 `;
+
+export const FETCH_SUMMARY = gql`
+  {
+    getSummary{
+      food
+      clothing
+      housing
+      health
+      transport
+      entertainment
+      other
+      sum
+    }
+  }
+`;
