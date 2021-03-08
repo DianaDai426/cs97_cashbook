@@ -1,17 +1,22 @@
 import React from "react"
 
-function Header(){
+function Header() {
     return (
-    // <AppBar position="static">
-    // <Toolbar>
+        // <AppBar position="static">
+        // <Toolbar>
 
-    // <Button color="inherit">DD's Journal</Button>
-    //     <Button color="inherit">Login</Button>
-    // </Toolbar>
-    // </AppBar>
+        // <Button color="inherit">DD's Journal</Button>
+        //     <Button color="inherit">Login</Button>
+        // </Toolbar>
+        // </AppBar>
+
+
         <header>
-            <h1>Cashbook</h1>
+            <div id="logo">
+                <img src="https://emeryyu.github.io/resources/Images/logo.png"></img>
+            </div>
         </header>
+
     )
 }
 

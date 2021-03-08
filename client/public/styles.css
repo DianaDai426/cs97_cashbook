@@ -86,6 +86,7 @@
     padding: 15px;
     border-radius: 7px;
     box-shadow: 0 1px 5px rgb(138, 137, 137);
+    
   }
   form.create-note input,
   form.create-note textarea {
@@ -96,6 +97,7 @@
     font-size: 1.2em;
     font-family: inherit;
     resize: none;
+    
   }
   form.create-note button {
     position: absolute;
@@ -110,12 +112,41 @@
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
     cursor: pointer;
     outline: none;
+    
   }
 
   .form-container{
+    color: white;
     width: 400px;
     margin: auto;
+    text-align: center;
   }
+
+
+  .field {
+    color: white;
+    text-align:left;
+  }
+
+  
+
+  .ui.input {
+    border-radius: 50%;
+    opacity: 0.5;
+  }
+
+  button.ui.primary.button {
+    margin-top: 10px;
+    width: 400px;
+    background-color: rgb(4, 126, 75);
+    opacity: 1 !important;
+  }
+
+  button.ui.primary.button:hover {
+    background-color: rgb(0, 68, 40);
+  }
+  
+
 
   form.create-note label{
     width: 100%;
@@ -125,10 +156,55 @@
     font-size: 1.2em;
     font-family: inherit;
     resize: none;
+    
   }
 
   #operations {
     height: 40px;
+  }
+
+  .page {
+    overflow: hidden;
+    height: 100vh;
+    margin-top: 20px;
+    background-image: url("https://img5.goodfon.com/wallpaper/nbig/2/27/zelenyi-fon-tekstura-abstract-background-green-color.jpg");
+    background-repeat: no-repeat;
+    background-size:cover;
+  }
+
+  .login {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 100px;
+    padding-top: 50px;
+    height: 470px;
+    width: 500px;
+    background-color: rgba(255, 255, 255, 0.3);
+  }
+
+  .register {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 100px;
+    padding-top: 50px;
+    height: 550px;
+    width: 500px;
+    background-color: rgba(255, 255, 255, 0.3);
+    
+  }
+  
+  
+
+  #logo {
+    width: 20%;
+    height: 10%;
+    overflow: hidden;
+    display: inline-block;
+  }
+
+  .container img {
+    max-width: 100%;
+    height: auto;
   }
 
   
