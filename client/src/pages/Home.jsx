@@ -7,6 +7,7 @@ import { useLazyQuery } from '@apollo/client';
 import {AuthContext} from '../context/auth';
 import { Grid } from "@material-ui/core";
 import { Button, Dropdown } from 'semantic-ui-react'
+import { useHistory } from "react-router-dom";
 import { FETCH_RECORDS_QUERY, FETCH_RECORDSUSE_QUERY,
   FETCH_RECORDSAMOUNTIO_QUERY, FETCH_RECORDSAMOUNTDO_QUERY } from '../util/graphql';
 
@@ -14,10 +15,8 @@ import { FETCH_RECORDS_QUERY, FETCH_RECORDSUSE_QUERY,
 
 function Home(props) {
   const {user} = useContext(AuthContext);
-
-
   const [notes, setNotes] = useState([]);
-
+  const history = useHistory();
   const options = [
     { key: 1, text: 'Choice 1', value: 1 },
     { key: 2, text: 'Choice 2', value: 2 },
@@ -152,10 +151,10 @@ function Home(props) {
       {!user && (
         <div className="introduction">
         <h1 className="title-one">Track your Spending Easy and Fast</h1>
-        <h2 className="title-two">
+        <h3 className="title-two">
         Simple and powerful, CashBook gives you the tools and intelligence to control over your finance situation. 
-        </h2>
-        <Button className="get-started" color="green">Get Started</Button>
+        </h3>
+        <Button className="get-started" color="green" onClick={()=>{history.push('/login')}}>Get Started</Button>
         </div>
 
 
