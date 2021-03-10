@@ -1,0 +1,54 @@
+2/27 meeting update:
+-Allan's implementation has been redone. We are using Emery's more clean
+ implementation of the basic functions.
+tutorial that Emery used:
+https://www.youtube.com/watch?v=n1mdAPFq2Os&feature=emb_title&ab_channel=freeCodeCamp.org
+
+-Decided to use the first repo, instead of the two split repos we had.
+
+-each 'record' object will have these categories:
+	Amount/Date/Use(Purpose)/Comments
+
+
+We decided on these duties for these members:
+
+FRONTEND:
+Jon - Login/Register Page (~2:52 into the tutorial)
+
+Diana - Page for entering data/ displaying it.
+	implement add/delete/edit entry
+ 	'Sort by' drop down menu
+
+
+Allan - Figure out how to get frontend to be able to call and use
+	the backend methods. Then try to implement the report
+	which shows users data (~2:08 into tutorial)
+
+BACKEND:
+Emery - Has already created fundamental methods. Don't forget to change
+	it so that the date is added manually. Can try to make it so
+	the sorting by date/amount/whatever is implemented.
+
+NEXT MEETING:
+THURSDAY, 3/4
+
+
+
+
+
+3/4 Meeting update:
+Implemented adding/deleting notes and connection to backend, small bug with calendar
+sort-button added (needs improved looks), login/logout / register pages completed,
+authorization of user completed
+
+TO-DO:
+- fix calendar
+- add summary page
+- add button to display summary page
+- purpose/usage option on note change to ==> dropdown options (easier to summary)
+- sort button looks
+
+Next meeting Tuesday 3/9 8:30pm:
+- write script for presentation
+- record presentation (or on wednesday)
+- maybe have a button or something to change the color scheme of the home page

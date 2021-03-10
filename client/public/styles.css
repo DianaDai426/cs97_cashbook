@@ -1,0 +1,241 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+  }
+  html {
+    font-family: "Montserrat", sans-serif;
+  }
+  body {
+    background: #eee;
+    background-image: url("https://www.transparenttextures.com/patterns/cubes.png");
+    padding: 0 0px;
+  }
+  
+  header {
+    background-color: #768256;
+    margin: auto -16px;
+    padding: 16px 32px;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+  }
+  
+  header h1 {
+    color: #fff;
+    font-family: "McLaren", cursive;
+    font-weight: 200;
+  }
+  
+  footer {
+    position: absolute;
+    text-align: center;
+    bottom: 0;
+    width: 100%;
+    height: 2.5rem;
+  }
+  
+  footer p {
+    color: #ccc;
+  }
+
+  .note-board {
+    display: flex;
+    flex-wrap: wrap;
+    border-collapse: separate; 
+    border-spacing: 10px; 
+  }
+
+
+  .note {
+    background: #fff;
+    border-radius: 7px;
+    box-shadow: 0 1px 5px #ccc;
+    padding: 15px 10px 15px 10px;
+    width: 800px;
+    height:80px;
+    margin: 8px auto;
+    align-items: center;
+  }
+
+  .note h1 {
+    font-size: 1.1em;
+    margin-bottom: 6px;
+  }
+  .note p {
+    font-size: 1.1em;
+    margin-bottom: 10px;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
+  
+  .note button {
+    position: relative;
+    float: right;
+    margin-right: 10px;
+    color: #768256;
+    background-color: #ffffff;
+    border: none;
+    width: 36px;
+    height: 36px;
+    cursor: pointer;
+    outline: none;
+  }
+  
+  form.create-note {
+    position: relative;
+    width: 780px;
+    margin: 30px auto 20px auto;
+    background: #fff;
+    padding: 15px;
+    border-radius: 7px;
+    box-shadow: 0 1px 5px rgb(138, 137, 137);
+    
+  }
+  form.create-note input,
+  form.create-note textarea {
+    width: 100%;
+    border: none;
+    padding: 10px;
+    outline: none;
+    font-size: 1.2em;
+    font-family: inherit;
+    resize: none;
+    
+  }
+  form.create-note button {
+    position: absolute;
+    right: 18px;
+    bottom: -18px;
+    background: #768256;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    outline: none;
+    
+  }
+
+  .form-container{
+    color: white;
+    width: 400px;
+    margin: auto;
+    text-align: center;
+  }
+
+
+  .field {
+    color: white;
+    text-align:left;
+  }
+
+  .ui.input {
+    border-radius: 50%;
+    opacity: 0.5;
+  }
+
+  button.ui.primary.button {
+    margin-top: 10px;
+    width: 400px;
+    background-color: rgb(4, 126, 75);
+    opacity: 1 !important;
+  }
+
+  button.ui.primary.button:hover {
+    background-color: rgb(0, 68, 40) !important;
+  }
+
+  button.ui.primary.button:visited {
+    background-color: rgb(4, 126, 75);
+  }
+  
+  button.ui.primary.button:active {
+    background-color: rgb(4, 126, 75);
+  }
+
+  button.ui.primary.button:focus {
+    background-color: rgb(4, 126, 75);
+  }
+
+  form.create-note label{
+    width: 100%;
+    border: none;
+    padding: 10px;
+    outline: none;
+    font-size: 1.2em;
+    font-family: inherit;
+    resize: none;
+    
+  }
+
+  #operations {
+    height: 40px;
+  }
+
+  .page {
+    overflow: hidden;
+    height: 100vh;
+    margin-top: 20px;
+    background-image: url("https://img5.goodfon.com/wallpaper/nbig/2/27/zelenyi-fon-tekstura-abstract-background-green-color.jpg");
+    background-repeat: no-repeat;
+    background-size:cover;
+  }
+
+  .login {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 100px;
+    padding-top: 50px;
+    height: 470px;
+    width: 500px;
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 30px;
+  }
+
+  .register {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 100px;
+    padding-top: 50px;
+    height: 550px;
+    width: 500px;
+    background-color: rgba(255, 255, 255, 0.3);
+  }
+  
+
+  #logo {
+    width: 20%;
+    height: 50%;
+    overflow: hidden;
+    display: inline-block;
+  }
+
+  .container img {
+    max-width: 100%;
+    height: auto;
+  }
+  .introduction{
+    width: 400px;
+    padding-top: 50px;
+  }
+  .title-one{
+    font-size: 40px;
+  }
+
+  .title-two{
+    color: gray;
+  }
+  .get-started{
+    color:green;
+  }
+
+@media only screen and (min-width: 1200px) {
+  .ui.container {
+    max-width: 100px !important;
+    margin-left: 0px !important;
+    margin-right: 0px !important;
+  }
+}
+
