@@ -146,7 +146,8 @@ function Home(props) {
   }
 
   return (
-    <div className="App">
+    <div className="App" style={{height:'100vh'}}
+    >
       <Header />
       {!user && (
         <div className="introduction" style={{height:"100vh"}}>
@@ -154,7 +155,10 @@ function Home(props) {
         <h3 className="title-two">
         Simple and powerful, CashBook gives you the tools and intelligence to control over your finance situation. 
         </h3>
-        <Button className="get-started" onClick={()=>{history.push('/login')}} style={{backgroundColor:'#009069', color:"white"}}>Get Started</Button>
+        <h4>
+        By: Jonathan Lai,  Emery Yu,  Allan Shen,  Mengran Dai
+        </h4>
+        <Button className="get-started" onClick={()=>{history.push('/register')}} style={{backgroundColor:'#009069', color:"white"}}>Get Started</Button>
         </div>
       )}
       {user && (

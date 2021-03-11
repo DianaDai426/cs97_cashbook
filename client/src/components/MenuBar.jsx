@@ -9,6 +9,7 @@ function MenuBar() {
     const [activeItem, setActiveItem] = useState('');
 
     const handleItemClick = (e, { name }) => setActiveItem(name);
+    
 
     const menuBar = user ? (
         <div className="menu-bar">
@@ -23,7 +24,7 @@ function MenuBar() {
       <Menu.Menu position='right'>
           <Menu.Item
               name='logout'
-              onClick={logout}
+              onClick={() => {logout(); setActiveItem('home');}}
           />
       </Menu.Menu>
       </Menu>            
