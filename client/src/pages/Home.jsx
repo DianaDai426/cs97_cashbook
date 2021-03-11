@@ -149,42 +149,36 @@ function Home(props) {
     <div className="App">
       <Header />
       {!user && (
-        <div className="introduction">
+        <div className="introduction" style={{height:"100vh"}}>
         <h1 className="title-one">Track your Spending Easy and Fast</h1>
         <h3 className="title-two">
         Simple and powerful, CashBook gives you the tools and intelligence to control over your finance situation. 
         </h3>
-        <Button className="get-started" color="green" onClick={()=>{history.push('/login')}}>Get Started</Button>
+        <Button className="get-started" onClick={()=>{history.push('/login')}} style={{backgroundColor:'#009069', color:"white"}}>Get Started</Button>
         </div>
-
-
-
       )}
       {user && (
-          <CreateArea onAdd={addNote} />
-      )}
-      <div id="operations">
-        {user && (
-          <Dropdown 
-          text='Sort by'
-          style={{color:'green'}}
-          >
-            <Dropdown.Menu>
-              <Dropdown.Item text='Date' description = 'default' onClick = {recordDate} />
-              <Dropdown.Item text='Purpose' description = 'alphabetical' onClick = {recordUse} />
-              <Dropdown.Item text='Amount' description = '(Increasing)' onClick = {recordAmIO} />
-              <Dropdown.Item text='Amount' description = '(Decreasing)' onClick = {recordAmDO} />
-            </Dropdown.Menu>
-          </Dropdown>
-        )}
-        {user && (
-            <button className="ui right floated olive button" onClick={summaryButton}>Summary</button>
-        )}
-      </div>
+        <div className="App">
+          <CreateArea onAdd={addNote} />       
 
+          <div id="operations">
+              <Dropdown 
+              text='Sort by'
+              style={{color:'green', fontSize:"18px"}}
+              >
+                <Dropdown.Menu>
+                  <Dropdown.Item text='Date' description = 'default' onClick = {recordDate} />
+                  <Dropdown.Item text='Purpose' description = 'alphabetical' onClick = {recordUse} />
+                  <Dropdown.Item text='Amount' description = '(Increasing)' onClick = {recordAmIO} />
+                  <Dropdown.Item text='Amount' description = '(Decreasing)' onClick = {recordAmDO} />
+                </Dropdown.Menu>
+              </Dropdown>
+                <Button className="ui right floated olive button" style={{backgroundColor:'#009069'}} onClick={summaryButton}>Summary</Button>
+
+          </div>
 
       <div className="note-board">
-      {user && (notes.map((noteItem, index) => {
+      { (notes.map((noteItem, index) => {
           return (
             <Note
               key={index}
@@ -200,7 +194,9 @@ function Home(props) {
           );
         })
       )}
-      </div>
+      </div>                   
+        </div>
+      )}
     </div>
   );
 }

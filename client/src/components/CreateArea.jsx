@@ -143,14 +143,18 @@ function CreateArea(props) {
   return (
     <div>
       <form className="create-note">
+      <div className="create-note-block">
         <CurrencyInput
         name = "amount"
         value={note.amount}
         onValueChange={handleOnValueChange}
         prefix="$"
         groupSeparator=""
-        />
+        // style={{backgroundColor:'#d8f3dc'}}
+        />        
+      </div>
 
+      <div className="create-note-block">
         <TextField
             id="date"
             type="date"
@@ -163,8 +167,10 @@ function CreateArea(props) {
             InputProps={{
                disableUnderline: true,
                 }}
-          />
-        <div>
+          />        
+      </div>
+
+        <div className="create-note-block">
           {/* <label>Purpose: </label> */}
           <Select
              name="use"
@@ -173,15 +179,20 @@ function CreateArea(props) {
              options={options}
            />
         </div>
+
+        <div className="create-note-block">
         <textarea
           name="comment"
           onChange={handleChange}
           value={note.comment}
           placeholder="(Comment)"
           rows={2}
+          background= 'black'
         />
+        </div>
 
-          <Fab onClick={submitNote}>
+
+          <Fab onClick={submitNote} style={{backgroundColor:'rgb(0,144,105)'}}>
             <AddIcon />
           </Fab>
         {error && <Alert variant="outlined" severity="warning">{error}</Alert>}

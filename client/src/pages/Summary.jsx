@@ -32,8 +32,9 @@ function Summary(props) {
 
 
   return (
-    <div>
+    <div >
       <Header />
+      <div className="summary">
       {user && (
         <div class="ui huge green statistics">
           <div class="statistic">
@@ -46,8 +47,50 @@ function Summary(props) {
           </div>
         </div>
       )}
+
+      <table style={{margin:'auto auto'}}>
+        <tr>
+          <td>
+      {user && 
+        <Chart
+        width={'800px'}
+        height={'400px'}
+        chartType="PieChart"
+        loader={<div>Loading Chart</div>}
+        data={[
+          ['Expense', 'percent'],
+          ['Food', summary.food],
+          ['Health', summary.health],
+          ['Housing', summary.housing],
+          ['Clothing', summary.clothing],
+          ['Entertainment', summary.entertainment], // Below limit.
+          ['Transportation', summary.transport],
+          ['Other', summary.other],  // Below limit.
+        ]}
+        options={{
+          sliceVisibilityThreshold: 0.01,
+          pieStartAngle: 100,
+          slices: {
+            0: { color: '#F2711C' },
+            1: { color: '#DB2828' },
+            2: { color: '#21BA45' },
+            3: { color: '#6435C9' },
+            4: { color: '#E03997' },
+            5: { color: '#2185D0' },
+            6: { color: '#767676' },
+          },
+          backgroundColor: {
+          fill: 'transparent',
+        },
+        chartArea:{left:5,top:40, right:5,width:"70%",height:"70%"},
+        }}
+        rootProps={{ 'data-testid': '7' }}
+      />}
+      </td>
+      
+      <td>
       {user && (
-        <table class="ui celled table">
+        <table class="ui celled table" style={{width:'15vw'}}>
             <thead>
               <tr><th>Purpose</th>
               <th>Amount Spent</th>
@@ -83,7 +126,13 @@ function Summary(props) {
               </tr>
             </tbody>
           </table>
-      )}
+      )}          
+          </td>
+        </tr>
+      </table>
+
+
+      <div style={{width:'70vw', margin:'auto auto'}}>
       {user && (
         <Progress percent={summary.foodPer} color='orange' progress='percent'>Food </Progress>
       )}
@@ -105,42 +154,11 @@ function Summary(props) {
       {user && (
         <Progress percent={summary.otherPer} color='grey' progress='percent'>Other </Progress>
       )}
+      </div>
 
-
-
-      <Chart
-      width={'800px'}
-      height={'400px'}
-      chartType="PieChart"
-      loader={<div>Loading Chart</div>}
-      data={[
-        ['Expense', 'percent'],
-        ['Food', summary.food],
-        ['Health', summary.health],
-        ['Housing', summary.housing],
-        ['Clothing', summary.clothing],
-        ['Entertainment', summary.entertainment], // Below limit.
-        ['Transportation', summary.transport],
-        ['Other', summary.other],  // Below limit.
-      ]}
-      options={{
-        sliceVisibilityThreshold: 0.01,
-        pieStartAngle: 100,
-        slices: {
-      0: { color: '#F2711C' },
-      1: { color: '#DB2828' },
-      2: { color: '#21BA45' },
-      3: { color: '#6435C9' },
-      4: { color: '#E03997' },
-      5: { color: '#2185D0' },
-      6: { color: '#767676' },
-    
-    },
-      }}
-      rootProps={{ 'data-testid': '7' }}
-    />
-
+      </div>
     </div>
+
   );
 
 }

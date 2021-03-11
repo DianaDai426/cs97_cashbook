@@ -16,11 +16,15 @@ import MenuBar from './components/MenuBar';
 
 export default function App() {
     return (
-    <AuthProvider>
-      <Router>
-          <Container >
+    <AuthProvider >
+      <Router >
+          <Container 
+          style={{
+            backgroundColor: '#d8f3dc',
+            width:'100vw',
+            }}>
             <MenuBar />
-            <Switch>
+            <Switch style={{margin:"100 100px"}}>
               <Route exact path="/" component={Home}></Route>
               <AuthRoute exact path='/login' component = {Login} />
               <AuthRoute exact path='/register' component = {Register} />

@@ -71,7 +71,7 @@ function Note(props) {
           <p style={CommentStyle}>{props.comment}</p>          
         </th>
         <th>
-      <button style={{}} onClick={handleClick}>
+      <button  onClick={handleClick} >
         <DeleteIcon />
       </button>          
         </th>

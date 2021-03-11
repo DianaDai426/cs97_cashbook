@@ -13,8 +13,10 @@
   }
   
   header {
-    background-color: #768256;
-    margin: auto -16px;
+    /* background-color: #009069; */
+    background-image: url("https://img5.goodfon.com/wallpaper/nbig/2/27/zelenyi-fon-tekstura-abstract-background-green-color.jpg");
+    width: 50vw;
+    margin: 0 -16px;
     padding: 16px 32px;
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
     border-radius: 10px;
@@ -72,7 +74,7 @@
     position: relative;
     float: right;
     margin-right: 10px;
-    color: #768256;
+    color: #009069;
     background-color: #ffffff;
     border: none;
     width: 36px;
@@ -83,12 +85,13 @@
   
   form.create-note {
     position: relative;
-    width: 780px;
+    width: 350px;
+    height:250px;
     margin: 30px auto 20px auto;
     background: #fff;
     padding: 15px;
-    border-radius: 7px;
-    box-shadow: 0 1px 5px rgb(138, 137, 137);
+    border-radius: 5px;
+    box-shadow: 0 1px 10px rgb(138, 137, 137);
     
   }
   form.create-note input,
@@ -117,7 +120,9 @@
     outline: none;
     
   }
-
+ .create-note-block{
+   margin-bottom: 10px;
+ }
   .form-container{
     color: white;
     width: 400px;
@@ -139,24 +144,24 @@
   button.ui.primary.button {
     margin-top: 10px;
     width: 400px;
-    background-color: rgb(4, 126, 75);
+    background-color: rgb(0,144,105);
     opacity: 1 !important;
   }
 
   button.ui.primary.button:hover {
-    background-color: rgb(0, 68, 40) !important;
+    background-color: rgb(0,144,105) !important;
   }
 
   button.ui.primary.button:visited {
-    background-color: rgb(4, 126, 75);
+    background-color: rgb(0,144,105);
   }
   
   button.ui.primary.button:active {
-    background-color: rgb(4, 126, 75);
+    background-color: rgb(0,144,105);
   }
 
   button.ui.primary.button:focus {
-    background-color: rgb(4, 126, 75);
+    background-color: rgb(0,144,105);
   }
 
   form.create-note label{
@@ -172,6 +177,8 @@
 
   #operations {
     height: 40px;
+    width:50vw;
+    margin:auto auto;
   }
 
   .page {
@@ -219,23 +226,22 @@
   .introduction{
     width: 400px;
     padding-top: 50px;
+    margin-left: 100px;
   }
   .title-one{
+    width:500px;
     font-size: 40px;
+    padding: 10px 0;
   }
 
   .title-two{
     color: gray;
-  }
-  .get-started{
-    color:#768256;
+    width:500px;
+    padding: 10px 0px;
   }
 
-@media only screen and (min-width: 1200px) {
-  .ui.container {
-    max-width: 100px !important;
-    margin-left: 0px !important;
-    margin-right: 0px !important;
-  }
+.summary{
+  margin-top: 30px;
+  padding: 20px 50px;
 }
 
