@@ -12,14 +12,15 @@ function MenuBar() {
 
     const menuBar = user ? (
         <div className="menu-bar">
-      <Menu pointing secondary>
+      <Menu pointing secondary compact color={'red'}>
           <Menu.Item
               name={user.username}
               active
               as={Link}
               to="/"
+              color={'red'}
           />
-      <Menu.Menu position='left'>
+      <Menu.Menu position='right'>
           <Menu.Item
               name='logout'
               onClick={logout}
@@ -31,13 +32,14 @@ function MenuBar() {
 
     ) : (
         <div className="menu-bar">
-      <Menu pointing secondary>
+      <Menu pointing secondary compact>
           <Menu.Item
               name='home'
               active={activeItem === 'home'}
               onClick={handleItemClick}
               as={Link}
               to="/"
+              color={"red"}
           />
 
 
@@ -48,6 +50,7 @@ function MenuBar() {
               onClick={handleItemClick}
               as={Link}
               to="/login"
+              color={"yellow"}
           />
           <Menu.Item
               name='register'
@@ -55,6 +58,7 @@ function MenuBar() {
               onClick={handleItemClick}
               as={Link}
               to="/register"
+              color={"yellow"}
           />
       </Menu.Menu>
       </Menu>            
