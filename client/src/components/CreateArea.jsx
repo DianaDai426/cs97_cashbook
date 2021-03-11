@@ -186,16 +186,17 @@ function CreateArea(props) {
           onChange={handleChange}
           value={note.comment}
           placeholder="(Comment)"
-          rows={2}
+          rows={1}
           background= 'black'
         />
+        {error && <Alert variant="outlined" severity="warning">{error}</Alert>}        
         </div>
 
 
           <Fab onClick={submitNote} style={{backgroundColor:'rgb(0,144,105)'}}>
             <AddIcon />
           </Fab>
-        {error && <Alert variant="outlined" severity="warning">{error}</Alert>}
+
       </form>
     </div>
   );

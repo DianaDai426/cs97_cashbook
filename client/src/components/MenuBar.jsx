@@ -3,9 +3,6 @@ import { Menu } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 
 import {AuthContext} from '../context/auth'
-const MenuStyles = {
-
-}
 
 function MenuBar() {
     const {user, logout} = useContext(AuthContext);
@@ -14,24 +11,26 @@ function MenuBar() {
     const handleItemClick = (e, { name }) => setActiveItem(name);
 
     const menuBar = user ? (
-      <Menu pointing secondary style={{margin:'100 100px'}}>
+        <div className="menu-bar">
+      <Menu pointing secondary>
           <Menu.Item
               name={user.username}
               active
               as={Link}
               to="/"
           />
-
-
-      <Menu.Menu position='right'>
+      <Menu.Menu position='left'>
           <Menu.Item
               name='logout'
               onClick={logout}
           />
       </Menu.Menu>
-      </Menu>
+      </Menu>            
+    </div>
+
 
     ) : (
+        <div className="menu-bar">
       <Menu pointing secondary>
           <Menu.Item
               name='home'
@@ -42,7 +41,7 @@ function MenuBar() {
           />
 
 
-      <Menu.Menu position='right'>
+      <Menu.Menu position='left'>
           <Menu.Item
               name='login'
               active={activeItem === 'login'}
@@ -58,7 +57,9 @@ function MenuBar() {
               to="/register"
           />
       </Menu.Menu>
-      </Menu>
+      </Menu>            
+        </div>
+
     )
     return menuBar;
 

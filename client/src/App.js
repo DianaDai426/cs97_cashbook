@@ -23,7 +23,7 @@ export default function App() {
             backgroundColor: '#d8f3dc',
             width:'100vw',
             }}>
-            <MenuBar />
+            <MenuBar style={{ marginBotton:'0px'}}/>
             <Switch style={{margin:"100 100px"}}>
               <Route exact path="/" component={Home}></Route>
               <AuthRoute exact path='/login' component = {Login} />
