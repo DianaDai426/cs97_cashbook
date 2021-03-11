@@ -153,7 +153,7 @@ function Home(props) {
         <div className="introduction" style={{height:"100vh"}}>
         <h1 className="title-one">Track your Spending Easy and Fast</h1>
         <h3 className="title-two">
-        Simple and powerful, CashBook gives you the tools and intelligence to control over your finance situation. 
+        Simple and powerful, CashBook gives you the tools and intelligence to take control over your finance situation. 
         </h3>
         <h4>
         By: Jonathan Lai,  Emery Yu,  Allan Shen,  Mengran Dai
