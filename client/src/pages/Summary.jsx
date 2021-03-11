@@ -36,7 +36,7 @@ function Summary(props) {
       <Header />
       <div className="summary">
       {user && (
-        <div class="ui huge green statistics">
+        <div class="ui huge green statistics" style={{marginLeft:'10vw'}}>
           <div class="statistic">
             <div class="value">
               ${summary.sum}
@@ -90,7 +90,7 @@ function Summary(props) {
       
       <td>
       {user && (
-        <table class="ui celled table" style={{width:'15vw'}}>
+        <table class="ui celled inverted table" style={{width:'20vw'}}>
             <thead>
               <tr><th>Purpose</th>
               <th>Amount Spent</th>

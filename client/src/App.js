@@ -13,16 +13,18 @@ import Register from './pages/Register';
 import Summary from './pages/Summary';
 import MenuBar from './components/MenuBar';
 
+//#009069
+const ContainerStyles = {
+  background: 'linear-gradient(120deg, #f9f9f9 60%, #f9f9f9 60%)',
+  width:'100vw',
+  }  
 
 export default function App() {
     return (
     <AuthProvider >
       <Router >
           <Container 
-          style={{
-            backgroundColor: '#d8f3dc',
-            width:'100vw',
-            }}>
+          style={ContainerStyles}>
             <MenuBar style={{ marginBotton:'0px'}}/>
             <Switch style={{margin:"100 100px"}}>
               <Route exact path="/" component={Home}></Route>
