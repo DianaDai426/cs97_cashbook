@@ -60,10 +60,6 @@ function CreateArea(props) {
     },
   })
 
-   function callOrder() {
-     sendNote();
-     //preventDefault();
-   }
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -194,7 +190,7 @@ function CreateArea(props) {
         </div>
 
 
-          <Fab onClick={callOrder} style={{backgroundColor:'rgb(0,144,105)'}}>
+          <Fab onClick={sendNote} style={{backgroundColor:'rgb(0,144,105)'}}>
             <AddIcon />
           </Fab>
 
