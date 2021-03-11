@@ -1,20 +1,12 @@
-Go into the directory with these files and type 'npm install'
+## Backend
 
+Go into the directory with these files and type 'npm install'.\
 Then, type 'node index' to start.
 
-This works on http://localhost:5000
+Open up your browser and go to http://localhost:5000 to see the server.
 
-Then go into ./client and type the following commands:
+## Frontend
 
-npm install -g yarn;
-yarn add @material-ui/core ;
-yarn add @material-ui/icons ;
-yarn add @material-ui/lab ;
-npm install semantic-ui-react semantic-ui-css;
-npm install jwt-decode ;
-yarn add semantic-ui-react;
-npm install react-router-dom --save ;
-npm install ;
-npm start ;
-
-This will open up on http://localhost:3000
+Then go into ./client and type 'npm install'.\
+Then in your terminal type 'npm start'.\
+Open up your browser and go to http://localhost:3000 to see the webpage
