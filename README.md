@@ -8,4 +8,5 @@ Open up your browser and go to http://localhost:5000 to see the server.
 ## Frontend
 
 Then go into ./client and type 'npm install'.\
+Then in your terminal type 'npm start'.\
 Open up your browser and go to http://localhost:3000 to see the webpage
