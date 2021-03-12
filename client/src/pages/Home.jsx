@@ -5,12 +5,10 @@ import CreateArea from "../components/CreateArea";
 import { useQuery } from '@apollo/react-hooks';
 import { useLazyQuery } from '@apollo/client';
 import {AuthContext} from '../context/auth';
-import { Grid } from "@material-ui/core";
 import { Button, Dropdown } from 'semantic-ui-react'
 import { useHistory } from "react-router-dom";
 import { FETCH_RECORDS_QUERY, FETCH_RECORDSUSE_QUERY,
   FETCH_RECORDSAMOUNTIO_QUERY, FETCH_RECORDSAMOUNTDO_QUERY } from '../util/graphql';
-
 
 
 function Home(props) {
@@ -146,7 +144,7 @@ function Home(props) {
   }
 
   return (
-    <div className="App">
+    <div className="App" style={{height:'100vh'}}>
       <Header />
       {!user && (
         <div className="introduction" style={{height:"100vh"}}>
@@ -164,7 +162,7 @@ function Home(props) {
           <div id="operations">
               <Dropdown 
               text='Sort by'
-              style={{color:'green', fontSize:"18px"}}
+              style={{ fontSize:"18px"}}
               >
                 <Dropdown.Menu>
                   <Dropdown.Item text='Date' description = 'default' onClick = {recordDate} />
