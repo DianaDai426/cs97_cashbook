@@ -52,6 +52,13 @@ function CreateArea(props) {
       submitNote();
     },
     onError(err){
+      console.log("validating....");
+
+      //check if valid (required fields except the commment)
+      if(!note.amount || !date || !note.use){
+        setError ("All fields except comment must be filled");
+        return;
+      }
       console.log(err.message);
       console.log(err.networkError);
       console.log(err.graphQLErrors);
