@@ -21,6 +21,7 @@ function CreateArea(props) {
     recordId:"",
   });
 
+
   const [error, setError] = useState("");
   const [someVal, setSomeVal] = useState('')
   /*for the purpose form*/
@@ -48,7 +49,7 @@ function CreateArea(props) {
       console.log(note);
       note.recordId = result.data.createRecord.id;
       console.log("hello world");
-      //submitNote();
+      submitNote();
     },
     onError(err){
       console.log(err.message);
@@ -59,10 +60,6 @@ function CreateArea(props) {
     },
   })
 
-  // function callOrder(event) {
-  //   sendNote();
-  //   event.preventDefault();
-  // }
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -113,7 +110,7 @@ function CreateArea(props) {
     }
 
     //if nothing is empty sent to backend
-    sendNote();
+    //sendNote(); //latest
 
     //create and add newNote to store in Home
     const newNote = {
@@ -193,7 +190,7 @@ function CreateArea(props) {
         </div>
 
 
-          <Fab onClick={submitNote} style={{backgroundColor:'rgb(0,144,105)'}}>
+          <Fab onClick={sendNote} style={{backgroundColor:'rgb(0,144,105)'}}>
             <AddIcon />
           </Fab>
 
